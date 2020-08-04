@@ -1,0 +1,251 @@
+<ion-app>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-botton>
+        <ion-icon name='home'></ion-icon>
+        
+      </ion-tab-botton>
+      <ion-tab-botton>
+        <ion-icon name='heart'></ion-icon>
+        
+      </ion-tab-botton>
+      <ion-tab-botton>
+        <ion-icon name="information-circle-outline"></ion-icon>
+        
+      </ion-tab-botton>
+      <ion-tab-botton>
+        <ion-icon name='person'></ion-icon>
+        <ion-label></ion-label>
+      </ion-tab-botton>
+    </ion-tab-bar>
+  </ion-tabs>
+  <ion-header>
+    <ion-toolbar class="primary">
+      <img src="../../../assets/images/logoBlanco.png"  width="170px" height="48px" text-center>
+      <ion-buttons slot="end">
+        <ion-button color="light">
+          <ion-icon name="menu" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  
+  <ion-content>
+    <section class="intro animated fadeIn" *ngIf="showReminder">
+      <img src="../../../assets/images/doctor-intro.jpg" alt="doctor intro">
+      <div class="intro-text">
+        <h2>Hi</h2>
+        <p>It seems, some required profile information are missing or the submitted infromation is not certified. Due to
+          that you've been given limited access to the features of the app.</p>
+        <a (click)="goToProfile()" class="go-btn">Go to Profile</a>
+        <a (click)="dismissReminder()" class="skip-btn">I'll do that later</a>
+      </div>
+    </section>
+    <section>
+      <!-- <ion-label class="section__title" slot="start">
+          Advanced Services
+        </ion-label> -->
+      <ion-slides class="slides__dashboard featured mt-0 full-width" [options]="slideOpts" pager="true">
+        <ion-slide>
+          <div class="slides__featured">
+            <div class="banner" style="background-image: url('../../../assets/images/genomics.png')">
+              <div class="main-text"></div>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="slides__featured">
+            <div class="banner" style="background-image: url('../../../assets/images/dermatoscopy.jpg')">
+              <div class="main-text"></div>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="slides__featured">
+            <div class="banner" style="background-image: url('../../../assets/images/tourism.jpg')">
+              <div class="main-text"></div>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="slides__featured">
+            <div class="banner" style="background-image: url('../../../assets/images/blogs.jpg')">
+              <div class="main-text"></div>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </section>
+    <!-- Social -->
+    <section>
+      <ion-label class="section__title" slot="start">
+        Social Network
+      </ion-label>
+      <div class="overscroll-wrapper">
+        <ion-slides class="slides__dashboard social" [options]="socialSlideOpts">
+          <ion-slide tappable>
+            <div class="card" routerLink="/social/community-feed" routerDirection="forward">
+              <div class="cover community"></div>
+              <div class="title">Community</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/social/doctors-network" routerDirection="forward">
+              <div class="cover docnet"></div>
+              <div class="title">Doctors' Network</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/social/care-coordination" routerDirection="forward">
+              <div class="cover carecord"></div>
+              <div class="title">Care Cordination</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/social/topic-circle" routerDirection="forward">
+              <div class="cover topics"></div>
+              <div class="title">Topic Circle</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/news" routerDirection="forward">
+              <div class="cover news"></div>
+              <div class="title">News</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/videos" routerDirection="forward">
+              <div class="cover eduvids"></div>
+              <div class="title">Videos</div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </section>
+    <!-- Patient Care -->
+    <section>
+      <ion-label class="section__title" slot="start">
+        Patient Care
+      </ion-label>
+      <div class="overscroll-wrapper">
+        <ion-slides class="slides__dashboard patient-care" [options]="careSlideOpts">
+          <ion-slide tappable>
+            <div class="card" routerLink="/schedule" routerDirection="forward">
+              <div class="cover c-appoint"></div>
+              <div class="title">Appointment</div>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="card">
+              <div class="cover t-appoint"></div>
+              <div class="title">Telemedicine</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/e-health-records" routerDirection="forward">
+              <div class="cover ehr"></div>
+              <div class="title">EHR</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/e-fax" routerDirection="forward">
+              <div class="cover efax"></div>
+              <div class="title">E-Fax</div>
+            </div>
+          </ion-slide>
+          <ion-slide tappable>
+            <div class="card" routerLink="/referrals" routerDirection="forward">
+              <div class="cover referrals"></div>
+              <div class="title">Referrals</div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </section>
+    <!-- Referrals -->
+    <section>
+      <ion-label class="section__title" slot="start">
+        New Referrals
+      </ion-label>
+      <ion-list class="referral-list" (click)="showReferrals()">
+        <ion-item lines="inset">
+          <ion-avatar slot="start">
+            <img src="https://i.pravatar.cc/100?img=49" alt="user">
+          </ion-avatar>
+          <ion-label>
+            <ion-text color="medium">
+              <h3>Sally Peterson</h3>
+            </ion-text>
+            <p>DANCERITY, MD.</p>
+          </ion-label>
+          <ion-badge slot="end" color="primary">2</ion-badge>
+        </ion-item>
+        <ion-item lines="inset">
+          <ion-avatar slot="start">
+            <img src="https://i.pravatar.cc/100?img=9" alt="user">
+          </ion-avatar>
+          <ion-label>
+            <ion-text color="medium">
+              <h3>Ava Stevens</h3>
+            </ion-text>
+            <p>HINWAY, BDS.</p>
+          </ion-label>
+          <!-- <ion-badge slot="end" color="primary"></ion-badge> -->
+        </ion-item>
+      </ion-list>
+    </section>
+    <!-- Orders -->
+  
+    <!-- Deals -->
+    <section *ngIf="dealLoaded">
+      <ion-label class="section__title" slot="start">
+       Farmacias Asociadas
+        <ion-text class="more-link" text-right routerLink="/marketplace" routerDirection="forward">Ver</ion-text>
+      </ion-label>
+    
+    </section>
+    
+    <!-- Privacy policy -->
+    <section class="announcement static" *ngIf="1">
+      <div class="close-btn">&times;</div>
+      <div class="data-policies">
+        <h4>Sus datos, nuestra preocupación</h4>
+        <p>Una política de privacidad es una declaración o un documento legal (en la ley de privacidad) que revela algunas o todas las formas en que un
+          party recopila, usa, divulga y administra los datos de un cliente o cliente. Cumple un requisito legal para
+          proteger a un cliente o la privacidad del cliente. </p>
+  
+        <div class="act">
+          <button>Políticas de Privacidad</button>
+          <button>Términos de uso</button>
+        </div>
+      </div>
+    </section>
+    <!-- Appo -->
+    <section>
+      <ion-label class="section__title" slot="start">
+        Nuestros Médicos
+       
+      </ion-label>
+      <div class="overscroll-wrapper">
+        <ion-slides class="slides__dashboard contact-list" [options]="patientsSlideOpts">
+          <ion-slide tappable (click)="selectPatient(item)" *ngFor="let item of patients">
+            <div class="contact">
+              <div class="avatar">
+                <img [src]="item.picture" alt="...">
+              </div>
+              <div class="name">{{item.name.first}} {{item.name.last}}</div>
+              <span class="age">({{item.age}})</span>
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </section>
+    
+  </ion-content>
+  <ion-footer class="flat">
+    <footer-tabs></footer-tabs>
+  </ion-footer>
+</ion-app>
+

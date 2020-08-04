@@ -1,0 +1,74 @@
+<div class="page__welcome h-100">
+  <div class="bg"></div>
+  <div class="content">
+    <ion-slides class="onboarding slides" pager="true" [options]="slideOpts">
+      <ion-slide class="screen">
+        <div class="intro">
+          <div class="image"></div>
+          <div class="text">
+            <h2>Bienvenido a MediCite</h2>
+            <p>
+             La app donde puedes realizar tu cita médica a la comodidad de tu hogar.
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide class="screen">
+        <div class="intro">
+          <div class="image"></div>
+          <div class="text">
+            <h2>Revíse su historial médico</h2>
+            <p>Usted puede revisar de manera inmediata su historial
+              sin necesidad de asistir al centro médico.</p>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide class="screen">
+        <div class="intro">
+          <div class="image"></div>
+          <div class="text">
+            <h2>Farmacia</h2>
+            <p>
+              ¡Solicita tus medicamentos en nuestra locación a un precio especial!
+            </p>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide class="screen">
+        <div class="intro">
+          <div class="image"></div>
+          <div class="text">
+            <h2>Neurología</h2>
+            <p>Asiste con nuestros neurólogos más conocidos del pais.</p>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+    <div class="welcome-text">
+      <div class="intro">
+        <div>
+          <div class="social-login">
+            <!-- <button class="btn btn-fill fb">Continue with Facebook</button> -->
+            <button
+              class="btn btn-fill"
+              routerLink="/type-of-register"
+              routerDirection="root"
+            >
+              Regístrate
+            </button>
+          </div>
+        
+          <div class="/login">
+            <button
+              class="btn btn-outline"
+              routerLink="/login"
+              routerDirection="root"
+            >
+              Iniciar Sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

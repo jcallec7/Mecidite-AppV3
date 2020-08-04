@@ -4,13 +4,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'welcome',
     pathMatch: 'full'
   },
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },  {
+  },
+  {
     path: 'create-consulta',
     loadChildren: () => import('./pages/consulta/create-consulta/create-consulta.module').then( m => m.CreateConsultaPageModule)
   },
@@ -21,7 +22,15 @@ const routes: Routes = [
   {
     path: 'edit-consulta',
     loadChildren: () => import('./pages/consulta/edit-consulta/edit-consulta.module').then( m => m.EditConsultaPageModule)
+  },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
+  },  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   }
+
 
 
 ];
