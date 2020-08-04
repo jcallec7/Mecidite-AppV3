@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "300913221142",
+    "firebase_url": "https://mediciteapp.firebaseio.com",
+    "project_id": "mediciteapp",
+    "storage_bucket": "mediciteapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300913221142:android:7252a14d13e3986eb69f37",
+        "android_client_info": {
+          "package_name": "ec.ups.medicite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300913221142-n8ld0h112juo7qfdthbitm688r7fl9bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlm4oce3amk5YClYKs6fgjituoIPIAbOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300913221142-n8ld0h112juo7qfdthbitm688r7fl9bd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "300913221142-ul180e4bu3cnq8iejl1k5reqfgqar7vp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ec.ups.medicite"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
