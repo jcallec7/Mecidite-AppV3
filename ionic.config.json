@@ -1,0 +1,7 @@
+{
+  "name": "MediCite-AppV3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
