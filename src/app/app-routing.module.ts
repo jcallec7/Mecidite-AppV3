@@ -38,7 +38,15 @@ const routes: Routes = [
   {
     path: 'form-register',
     loadChildren: () => import('./pages/register/form-register/form-register.module').then( m => m.FormRegisterPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   }
+
 
 
 

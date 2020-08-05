@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="page__login h-100 bg__image">
+    <div class="ui__view__block">
+      <div class="content__centered p-0">
+        <div class="login-wrapper">
+
+          <div class="header">
+            <h2>Bienvenindo</h2>
+            <h6>Inicia sesión para continuar</h6>
+          </div>
+
+          <ion-card>
+            <ion-item>
+              <ion-input placeholder = "Correo" [(ngModel)]="correo"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-input [type]="showPassword ? 'text' : 'password'" placeholder = "Password" [(ngModel)]="contrasena"></ion-input>
+              <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+            </ion-item>
+          </ion-card>
+
+          <div class="ion-padding">
+            <ion-button expand="block" shape="block" (click)="redirect()">Iniciar Sesion</ion-button>
+          </div>
+
+          <div class="footer">
+            <div class="links">
+              <p>
+                ¿Olvidaste tu contraseña? <a routerLink="/reset-password" routerDirection="root">Recuperar Contraseña</a>
+              </p>
+              <p>¿No tienes cuenta? <a routerLink="/type-of-register" routerDirection="root">Regístrate</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
