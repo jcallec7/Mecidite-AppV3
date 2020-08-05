@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "ec.ups.medicite",
   "appName": "MediCite-AppV3",
   "bundledWebRuntime": false,
   "npmClient": "npm",
