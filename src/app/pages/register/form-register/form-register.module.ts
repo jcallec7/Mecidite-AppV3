@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormRegisterPageRoutingModule } from './form-register-routing.module';
 
 import { FormRegisterPage } from './form-register.page';
+import { ImageUploadComponent } from 'src/app/components/image-upload/image-upload.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { FormRegisterPage } from './form-register.page';
     IonicModule,
     FormRegisterPageRoutingModule
   ],
-  declarations: [FormRegisterPage]
+  declarations: [FormRegisterPage,ImageUploadComponent],
+  exports: [ImageUploadComponent]
 })
 export class FormRegisterPageModule {}

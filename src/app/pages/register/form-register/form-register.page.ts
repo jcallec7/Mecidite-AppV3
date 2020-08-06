@@ -70,6 +70,12 @@ export class FormRegisterPage implements OnInit {
 
   }
 
+  getImage(data:any){
+
+    console.log(data)
+
+  }
+
   togglePassword(){
 
     this.showPassword = !this.showPassword;

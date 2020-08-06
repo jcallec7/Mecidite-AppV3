@@ -22,8 +22,6 @@ export class ResetPasswordPage implements OnInit {
 
     const message = this.auth.resetPassword(this.correo)
 
-    console.log(message)
-
     message.then(async msg => {
 
       if(msg == true){
@@ -39,9 +37,6 @@ export class ResetPasswordPage implements OnInit {
         });
     
         await alert.present()
-    
-        console.log('puta')
-  
   
       }else{
   
@@ -56,8 +51,6 @@ export class ResetPasswordPage implements OnInit {
         });
     
         await alert.present()
-  
-        console.log('tu madre')
   
       }
 

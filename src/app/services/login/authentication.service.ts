@@ -14,8 +14,6 @@ import { Platform } from '@ionic/angular';
 })
 export class AuthenticationService {
 
-  flag = false
-
   public user: Observable<any>;
   
   constructor(private afAuth: AngularFireAuth,
@@ -42,16 +40,20 @@ export class AuthenticationService {
   
   async resetPassword(email: string){
 
+      let flag
+
       await this.afAuth.sendPasswordResetEmail(email).then(function(){
         console.log('Succesful')
-        this.flag = true
+        flag = true
         
       }).catch(function(error){
-        console.log('ERROR', error)
-        
-      })      
+        console.log('ERROR RESET', error)
 
-      return this.flag
+        flag = false
+        
+      })  
+
+      return flag
  
   } 
 

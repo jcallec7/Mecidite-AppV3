@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MediCite-AppV3</string>
+    <string name="title_activity_main">MediCite-AppV3</string>
+    <string name="package_name">ec.ups.medicite</string>
+    <string name="custom_url_scheme">ec.ups.medicite</string>
+</resources>
