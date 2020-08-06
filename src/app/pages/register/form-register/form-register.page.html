@@ -1,0 +1,119 @@
+<ion-content [fullscreen]="true">
+  <div class="page__login h-100 bg__image">
+    <div class="ui__view__block">
+      <div class="content__centered p-0">
+        <div class="login-wrapper">
+
+          <div class="header">
+            <h2>En primer lugar</h2>
+            <h6>Necesitamos información basica sobre ti</h6>
+          </div>
+  
+          <ion-card>
+            <ion-item>
+              <app-image-upload [icon]="'camera'" (uploadFinished)="getImage($event)"></app-image-upload>
+            </ion-item>
+          </ion-card>  
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Cedula</ion-label>
+              <ion-input [(ngModel)]="usuario.cedula"></ion-input>
+            </ion-item>
+          </ion-card>
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input [(ngModel)]="usuario.nombre"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Apellido</ion-label>
+              <ion-input [(ngModel)]="usuario.apellido"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Correo</ion-label>
+              <ion-input [(ngModel)]="email"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-input [type]="showPassword ? 'text' : 'password'" placeholder = "Contraseña" [(ngModel)]="password"></ion-input>
+              <ion-icon slot="end" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Fecha de Nacimiento</ion-label>
+              <ion-datetime displayFormat="MM DD YYYY" placeholder="Selecciona una Fecha" [(ngModel)]="usuario.fecha_nac"></ion-datetime>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Dirección</ion-label>
+              <ion-input [(ngModel)]="usuario.direccion"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Telefono</ion-label>
+              <ion-input [(ngModel)]="usuario.telf"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card>
+            <ion-item>
+              <ion-label position="floating">Sexo</ion-label>
+              <ion-input [(ngModel)]="usuario.sexo"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card [hidden] = "showCard ? true : false">
+            <ion-item>
+              <ion-label position="floating">Peso</ion-label>
+              <ion-input [(ngModel)]="usuario.peso"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card [hidden] = "showCard ? true : false">
+            <ion-item>
+              <ion-label position="floating">Estatura</ion-label>
+              <ion-input [(ngModel)]="usuario.estatura"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card [hidden] = "showCard ? false : true">
+            <ion-item>
+              <ion-label position="floating">Especialidad</ion-label>
+              <ion-input [(ngModel)]="usuario.especialidad"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <div class="ion-padding">
+            <ion-button expand="block" shape="block" (click)="redirect()">Siguente</ion-button>
+          </div>
+
+          <div class="footer">
+            <div class="links">
+              <p>
+                ¿Olvidaste tu contraseña? <a routerLink="/reset-password" routerDirection="root">Recuperar Contraseña</a>
+              </p>
+              <p>¿Tienes una cuenta? <a routerLink="/login" routerDirection="root">Inicia Sesión</a></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

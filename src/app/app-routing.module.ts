@@ -8,7 +8,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
+    path: 'folder',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
@@ -26,10 +26,32 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
-  },  {
+  },
+  {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'type-of-register',
+    loadChildren: () => import('./pages/register/type-of-register/type-of-register.module').then( m => m.TypeOfRegisterPageModule)
+  },
+  {
+    path: 'form-register',
+    loadChildren: () => import('./pages/register/form-register/form-register.module').then( m => m.FormRegisterPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+  {
+    path: 'factura',
+    loadChildren: () => import('./pages/factura/factura.module').then( m => m.FacturaPageModule)
   }
+
+
 
 
 
