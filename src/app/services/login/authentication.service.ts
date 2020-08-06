@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { switchMap, first } from "rxjs/operators";
 import * as firebase from "firebase/app";
+import * as firebase2 from 'firebase';
 import { Platform } from '@ionic/angular';
 
 
@@ -33,7 +34,9 @@ export class AuthenticationService {
   }
 
   async getCurrentUser(): Promise<any> {
-    return this.user.pipe(first()).toPromise();
+    
+    return firebase2.auth().currentUser
+
   }
 
   
