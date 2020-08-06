@@ -23,6 +23,10 @@ export class FormRegisterPage implements OnInit {
 
   email: string
 
+  base64: string 
+
+  dataUpload: Promise<any>
+
   passwordToggleIcon = 'eye-outline'
   
   constructor(private route: ActivatedRoute, private router: Router, private RegisterService: RegisterService) { }
@@ -47,7 +51,8 @@ export class FormRegisterPage implements OnInit {
       direccion: "",
       peso: "",
       estatura: "",
-      rol: this.rol
+      rol: "",
+      photoURL: ""
   
     }
 
@@ -63,16 +68,12 @@ export class FormRegisterPage implements OnInit {
 
   redirect(){
 
-    this.RegisterService.insertUsuario(this.usuario, this.rol[0].descripcion, this.email, this.password)
+    this.usuario.rol = this.rol[0].uid;
+   
+    this.RegisterService.insertUsuario(this.usuario, this.email, this.password)
     
     this.router.navigate(['home'])
 
-
-  }
-
-  getImage(data:any){
-
-    console.log(data)
 
   }
 
