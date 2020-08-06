@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './services/login/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +51,8 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private auth: AuthenticationService,
+    private router: Router
  
   
   ) {
@@ -64,6 +67,16 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.statusBar.styleLightContent();
       this.statusBar.backgroundColorByHexString('#3F51B5');
+      this.auth.getCurrentUser().then(user=>{
+        console.log(user)
+        if(user){
+          //this.router.navigate(['home'])
+        }else{
+          this.router.navigate(['welcome'])
+        }
+
+      }
+      )
     });
 
 

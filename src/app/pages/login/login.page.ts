@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
 
         const alert = await this.alert.create({
           header: 'Ups!',
-          message: 'Revisa tu información parece no ser la correcta',
+          message: 'Revisa tu información, parece no ser la correcta',
           buttons: [
             {
               text: 'OK'
