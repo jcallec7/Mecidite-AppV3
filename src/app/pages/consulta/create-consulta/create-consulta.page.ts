@@ -13,14 +13,19 @@ import { AuthenticationService } from 'src/app/services/login/authentication.ser
 })
 export class CreateConsultaPage implements OnInit {
 
-  consulta: Consulta
+  consulta: Consulta  = {
 
-  fechamin: string;
+    uid: "",
+    paciente: null,
+    medico: null,
+    estado: "",
+    fecha: new Date().toISOString(),
+    diagnostico: null
+
+  }
+
   fechamax: string;
-  horas: string[];
-
-  paciente: Usuario;
-
+  paciente: Observable<any>;
   medicos: Observable<Usuario[]>;
   medicoSelected: Usuario;
 
@@ -32,41 +37,12 @@ export class CreateConsultaPage implements OnInit {
   ngOnInit() {
 
     this.medicos = this.consultaService.getMedicos();
-    this.auth.getCurrentUser().then(user=>{
-      console.log(user)
-    });
-
-    this.consulta = {
-
-      uid: "",
-      paciente: null,
-      medico: null,
-      estado: "",
-      fecha: new Date().toISOString(),
-      diagnostico: null
-  
-    }
 
 		console.log("consulta inicializada: " + JSON.stringify(this.consulta))
     
     const d = new Date();
     d.setDate(d.getDate() + 60);
-    this.fechamin = d.toISOString();
     this.fechamax = d.toISOString(); 
-    
-    /*
-    this.consulta.fecha = ;
-    this.consulta.fecha = moment(this.consulta.fecha).toISOString();
-    this.fechamin = moment().subtract(5, 'h').format();
-    this.fechamin = moment(this.fechamin).toISOString();*/
-
-    //console.log(this.fechamin + "fecha consulta: " + this.consulta.fecha);
-    
-    //this.fechamax = moment().add(60, 'd').format();
-    //this.fechamax = moment(this.fechamax).toISOString();
-
-    //console.log(this.fechamin + "fecha consulta: " + this.consulta.fecha);
-
 
   }
 
@@ -79,15 +55,29 @@ export class CreateConsultaPage implements OnInit {
     this.consulta.medico = this.medicoSelected;
 
     // cargar datos de la sesion:
+    
     console.log("obteniendo datos paciente ");
-    this.consulta.paciente = await this.consultaService.getUsuarioById('Blvbt2LTeCNkv3NtqfAaOVRw4ff1');
+    this.auth.getCurrentUser().then(user => {
+      console.log(user)
+      if(user){
+        console.log("Usuario rescatado la pucta madre!!")
+        this.paciente = user
+      }else{
+        console.log("Usuario no rescatado")
+        //this.router.navigate(['welcome'])
+      }
+
+    }
+    );
+    console.log("User recuperado: " + this.paciente);
+    //this.consulta.paciente = await this.paciente;
     console.log("Paciente: " + this.consulta.paciente.nombre);
     console.log("Medico: " + this.medicoSelected.uid);
 
     //
     this.consulta.estado = "Creada, pendiente de pago";
 
-    console.log("sending consult: " + JSON.stringify(this.consulta) ) ;
+    console.log("sending consult: " + this.consulta ) ;
 
     /*let navigationExtras: NavigationExtras = {
       queryParams: {
@@ -96,7 +86,7 @@ export class CreateConsultaPage implements OnInit {
     };*/
     //this.consultaService.createConsulta(this.consulta, this.medicoSelected.uid, this.consulta.paciente.uid);
 
-    this.router.navigate([`factura/${this.consulta}`]);
+    //this.router.navigate([`factura/${this.consulta}`]);
 
   }
 

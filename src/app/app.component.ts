@@ -23,6 +23,11 @@ export class AppComponent implements OnInit {
       title: 'Outbox',
       url: '/folder/Outbox',
       icon: 'paper-plane'
+    },   
+    {
+      title: 'Nueva Consulta',
+      url: '/create-consulta',
+      icon: 'add'
     },
     {
       title: 'Favorites',
