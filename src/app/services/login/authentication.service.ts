@@ -47,7 +47,7 @@ export class AuthenticationService {
         flag = true
         
       }).catch(function(error){
-        console.log('ERROR RESET', error)
+        console.log('ERROR RESET:', error)
 
         flag = false
         
