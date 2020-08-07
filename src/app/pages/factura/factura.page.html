@@ -54,7 +54,7 @@
         </ion-list>
 
         <div class="ion-padding">
-            <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Usar Mismos Datos</ion-button>
+            <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Usar Mismos Datos Del Paciente</ion-button>
         </div>
 
     </header>
@@ -66,15 +66,17 @@
             </ion-list-header>
             <ion-item>
                 <ion-label>
-                    <h3>Consulta Medica</h3>
+                    <h3>
+                        Consulta Medica: 
+                    </h3>
+                    <h4>
+                        Dr(a). {{medico.nombre}} {{medico.apellido}}, {{medico.especialidad}}
+                    </h4>
                 </ion-label>
                 <ion-note slot="end" color="primary">
-                    <h3>{{factura.subtotal}}</h3>
+                    <h3>{{factura.subtotal | number:'1.2-2'}}</h3>
                 </ion-note>
             </ion-item>
-
-            
-
         </ion-list>
     </header>
     <ion-list>
@@ -83,7 +85,7 @@
                 <h1>Total</h1>
             </ion-label>
             <ion-note slot="end" color="primary">
-                <h1>{{factura.total}}</h1>
+                <h1>$ {{factura.total | number:'1.2-2'}}</h1>
             </ion-note>
         </ion-item>
     </ion-list>
@@ -93,5 +95,9 @@
     </div>
     <ion-button color="light">GENERAR PDF</ion-button>
     <!--.col-->
+
+    <div class="ion-padding">
+        <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Realizar El Pago</ion-button>
+    </div>
 
 </ion-content>

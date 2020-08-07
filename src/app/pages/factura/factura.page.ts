@@ -7,6 +7,8 @@ import { Factura } from 'src/app/model/Factura';
 import { UsuarioService } from 'src/app/services/usuario-service/usuario.service';
 import { Usuario } from 'src/app/model/Usuario';
 import { Rol } from 'src/app/model/Rol';
+import { database } from 'firebase';
+import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
 
 @Component({
   selector: 'app-factura',
@@ -35,14 +37,12 @@ export class FacturaPage implements OnInit {
     descripcion: "paciente"
   };
 
-  paciente: any = {
+  paciente: Usuario = new Usuario();
 
-    id: "",
-    data: {} as Usuario
-
-  };
+  medico: Usuario = new Usuario();
 
   constructor(private facturaService: FacturaService,
+              private consultaService: ConsultaService,
               private usuarioService: UsuarioService,
               private route: ActivatedRoute, 
               public router: Router, 
@@ -56,26 +56,25 @@ export class FacturaPage implements OnInit {
       }
     });
 
-    (await this.usuarioService.getUsuario2(this.consulta.pacienteUID)).subscribe((res) => {
-      if (res.payload.data() != null){
-        this.paciente.id = res.payload.id;
-        this.paciente.data = res.payload.data();
-      } else {
-        this.paciente.data = {} as Usuario;
-      }
-    });
+    this.paciente = await this.consultaService.getUsuarioById(this.consulta.pacienteUID)
+    this.medico = await this.consultaService.getUsuarioById(this.consulta.medicoUID)
 
-    console.log("nombre " + this.paciente.nombre)
+    console.log("nombre: " + this.medico.nombre)
 
     this.factura.consultaUID = this.consulta.uid
     this.factura.subtotal = 30 / 1.12;
     this.factura.total = 30;
 
+
+
   }
 
   fillWithCurrentData() {
 
-    
+    this.factura.nombre = this.paciente.nombre + " " + this.paciente.apellido
+    this.factura.cedula_ruc = this.paciente.cedula
+    this.factura.direccion = this.paciente.direccion
+    this.factura.telefono = this.paciente.telf
 
   }
 
