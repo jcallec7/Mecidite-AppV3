@@ -81,11 +81,12 @@ export class ConsultaService {
     return this.consultaCollection.add(consulta);
   }
 
-  updateNote(consulta: Consulta): Promise<void> {
-    return this.consultaCollection.doc(consulta.uid).update({ estado: consulta.estado, fecha: consulta.fecha });
+  updateConsulta(consulta: Consulta, estado:string) {
+    return this.afs.collection("consultas").doc(consulta.uid).update({
+      estado: estado});
   }
 
-  deleteNote(uid: string): Promise<void> {
+  deleteConsulta(uid: string): Promise<void> {
     return this.consultaCollection.doc(uid).delete();
   }
 
