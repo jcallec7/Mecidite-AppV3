@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
 import { UsuarioService } from 'src/app/services/usuario-service/usuario.service';
 import { Usuario } from 'src/app/model/Usuario';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list-consulta',
@@ -21,7 +22,8 @@ export class ListConsultaPage implements OnInit {
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
               public router: Router, 
-              public auth: AuthenticationService) { }
+              public auth: AuthenticationService,
+              private nav: NavController) { }
 
   ngOnInit() {
 
@@ -49,5 +51,11 @@ export class ListConsultaPage implements OnInit {
     });
 
   }
+
+  goBack() {
+    this.nav.back();
+  }
+
+
 
 }

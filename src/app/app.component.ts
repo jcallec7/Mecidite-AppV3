@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Perfil',
-      url: '/folder/Outbox',
+      url: 'account',
       icon: 'person'
     },   
     {

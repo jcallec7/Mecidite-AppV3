@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Medicamento } from 'src/app/model/Medicamento';
 import {MedicamentoServiceService} from 'src/app/services/medicamento-service/medicamento-service.service';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -12,7 +13,8 @@ export class CreateMedicamentoPage implements OnInit {
 
   medicamento: Medicamento = new Medicamento();
 
-  constructor(private ms: MedicamentoServiceService) { }
+  constructor(private ms: MedicamentoServiceService,
+    private nav: NavController) { }
 
   ngOnInit() {
   }
@@ -25,5 +27,10 @@ export class CreateMedicamentoPage implements OnInit {
     //console.log("Nuevo Registro de medicamento almacenado", number);
     //this.empleoService.saveEmpleo(this.empleo);
   }
+
+  goBack() {
+    this.nav.back();
+  }
+
 
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/model/Usuario';
 import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-consulta',
@@ -31,7 +32,8 @@ export class CreateConsultaPage implements OnInit {
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
               public router: Router, 
-              public auth: AuthenticationService) { }
+              public auth: AuthenticationService,
+              private nav: NavController) { }
 
   ngOnInit() {
 
@@ -76,11 +78,17 @@ export class CreateConsultaPage implements OnInit {
     });
 
     
+    
 
     //console.log("sending consult (Paciente UID): " + this.consulta.pacienteUID) ;
 
     
-
   }
+
+  goBack() {
+    this.nav.back();
+  }
+
+
 
 }

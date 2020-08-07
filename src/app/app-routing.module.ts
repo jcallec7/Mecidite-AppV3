@@ -86,6 +86,10 @@ const routes: Routes = [
     path: 'delete-diagnostico',
     loadChildren: () => import('./pages/diagnostico/delete-diagnostico/delete-diagnostico.module').then( m => m.DeleteDiagnosticoPageModule)
   },
+  {
+    path: 'account',
+    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
+  },
 
 
 

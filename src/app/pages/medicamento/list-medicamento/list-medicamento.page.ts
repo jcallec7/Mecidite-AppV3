@@ -3,6 +3,7 @@ import { Medicamento } from 'src/app/model/Medicamento';
 import {MedicamentoServiceService} from 'src/app/services/medicamento-service/medicamento-service.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list-medicamento',
@@ -13,7 +14,8 @@ export class ListMedicamentoPage implements OnInit {
 
   constructor(
     private ms: MedicamentoServiceService,
-    public router: Router
+    public router: Router,
+    private nav: NavController
   ) { }
 
   medicamento:Medicamento;
@@ -24,6 +26,11 @@ export class ListMedicamentoPage implements OnInit {
   ngOnInit() {
     this.medicamentos = this.ms.getMedicamentos();
   }
+
+  goBack() {
+    this.nav.back();
+  }
+
   
    trackByFn(index,obj){
     return obj.uid;

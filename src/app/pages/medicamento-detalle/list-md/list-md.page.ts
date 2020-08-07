@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { MdServiceService } from 'src/app/services/md-service/md-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
+import { NavController } from '@ionic/angular';
 
 type NewType = Router;
 
@@ -19,7 +20,8 @@ export class ListMdPage implements OnInit {
   constructor(
     private mdService: MdServiceService,
     private route: ActivatedRoute,
-    public router: NewType 
+    public router: NewType,
+    private nav: NavController 
   ) { }
   ngOnInit() {
     this.mediDetalles = this.mdService.getMediDetalles();
@@ -38,6 +40,9 @@ export class ListMdPage implements OnInit {
     this.mdService.deleteMedicamentoDetalle(medicamentoID);
   }
 
+  goBack() {
+    this.nav.back();
+  }
 
 
 }
