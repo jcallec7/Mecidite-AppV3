@@ -15,42 +15,28 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Home',
+      title: 'Inicio',
       url: 'home',
       icon: 'home'
     },
     {
-      title: 'Outbox',
+      title: 'Perfil',
       url: '/folder/Outbox',
-      icon: 'paper-plane'
+      icon: 'person'
     },   
     {
-      title: 'Nueva Consulta',
-      url: '/create-consulta',
-      icon: 'add'
-    },
-    {
-      title: 'Favorites',
+ 
+      title: 'Configuración',
       url: '/folder/Favorites',
-      icon: 'heart'
+      icon: 'settings-outline'
     },
     {
-      title: 'Archived',
+      title: 'Contáctanos',
       url: '/folder/Archived',
       icon: 'archive'
     },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
-    }
+ 
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -75,9 +61,9 @@ export class AppComponent implements OnInit {
       this.auth.getCurrentUser().then(user=>{
         console.log(user)
         if(user){
-          this.router.navigate(['home'])
+         // this.router.navigate(['home'])
         }else{
-          this.router.navigate(['welcome'])
+         //this.router.navigate(['welcome'])
         }
 
       }
