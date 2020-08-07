@@ -15,22 +15,6 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-<<<<<<< HEAD
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
-    },  
-    {
-      title: 'Nueva Consulta',
-      url: '/create-consulta',
-      icon: 'add'
-    },
-    {
-      title: 'Mis Consultas',
-      url: '/list-consulta',
-      icon: 'list'
-    }
-=======
       title: 'Inicio',
       url: 'home',
       icon: 'home'
@@ -52,7 +36,6 @@ export class AppComponent implements OnInit {
       icon: 'archive'
     },
  
->>>>>>> b640437a2b9e01dfdcb29bfba8ac7cdab385ccc2
   ];
 
   constructor(
