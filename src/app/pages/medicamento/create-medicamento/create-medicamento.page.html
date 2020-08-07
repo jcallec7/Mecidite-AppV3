@@ -1,27 +1,42 @@
 <ion-header>
-	<ion-toolbar>
-	  <ion-title>Nueva Medicamento</ion-title>
+	<ion-toolbar class="new-background-color">
+		<ion-title class = "title">Medicamento</ion-title>
 	</ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-  
-	<ion-list>
+</ion-header>
 
-	
-		<ion-item lines="full">
-			<ion-label position="floating">Nombre</ion-label>
-			<ion-input type="text" required [(ngModel)]="medicamento.nombre"></ion-input>
-		  </ion-item>
-	
-		  <ion-item lines="full">
-			<ion-label position="floating">Concentracion</ion-label>
-			<ion-input type="text" required [(ngModel)]="medicamento.concentracion"></ion-input>
-		  </ion-item>
-	
-	</ion-list>
-  
-	<ion-button (click)="guardarMedicamento()" type="submit" expand="full" fill="outline">Siguiente</ion-button>
-  
-  </ion-content>
-  
+<ion-content [fullscreen]="true">
+	<div class="page__login h-100 bg__image">
+		<div class="ui__view__block">
+			<div class="content__centered p-0">
+				<div class="login-wrapper">
+					<ion-list>
+
+						<ion-card>
+							<ion-item lines="full">
+								<ion-label position="floating">Nombre</ion-label>
+								<ion-input type="text" required [(ngModel)]="medicamento.nombre"></ion-input>
+							</ion-item>
+						</ion-card>
+
+
+						<ion-card>
+							<ion-item lines="full">
+								<ion-label position="floating">Concentración</ion-label>
+								<ion-input type="text" required [(ngModel)]="medicamento.concentracion"></ion-input>
+							</ion-item>
+						</ion-card>
+
+					</ion-list>
+
+
+					<div class="ion-padding">
+						<ion-button expand="block" shape="block" (click)="guardarMedicamento()">Guardar</ion-button>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</ion-content>
