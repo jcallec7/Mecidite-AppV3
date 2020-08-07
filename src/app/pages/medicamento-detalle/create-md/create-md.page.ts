@@ -32,12 +32,9 @@ export class CreateMdPage implements OnInit {
       console.log("Selected: " + this.medicamentoSelected + " uid: " + this.medicamentoSelected.uid);
     }
   
-    async createMediDetalle() {
-      this.mdService.createMediDetalle(this.md, this.medicamentoSelected.uid);
-      
-      //console.log("Medicamento = " + this.md.medicamento.uid);
-      //this.router.navigate(['lista-empleos'])
-    }
+    
+    
+
     goBack() {
       this.nav.back();
     }

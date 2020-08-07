@@ -1,0 +1,103 @@
+<ion-content>
+    <div class="control-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-2-4">
+                    <div class="slogan">Factura</div>
+                </div>
+                <!--.row-->
+            </div>
+            <!--.container-->
+        </div>
+        <!--.control-bar-->
+    </div>
+
+
+    <header class="row">
+        <div style="padding-top: 55px;padding-left: 95px;">
+            <p>
+                <strong style="padding-left: 20px;">Medicite S.A.</strong>
+                <br> <strong style="padding-left: 15px;">Cuenca-Ecuador</strong>
+                <br> <strong style="padding-left: 16px;">medicite@gmail.com</strong>
+                <br> <strong style="padding-left: 20px;">Telefono: 2828628</strong>
+                <br> <strong style="padding-left: 20px;">RUC: 0106432503</strong>
+            </p>
+        </div>
+    </header>
+    <header class="row">
+
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+                <ion-label position="stacked">
+                    <h1>Nombre Completo</h1>
+                </ion-label>
+                <ion-input [(ngModel)]="factura.nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">
+                    <h1>Cedula/RUC</h1>
+                </ion-label>
+                <ion-input [(ngModel)]="factura.cedula_ruc"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">
+                    <h1>Telefono/Celular</h1>
+                </ion-label>
+                <ion-input [(ngModel)]="factura.telefono"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">
+                    <h1>Direccion</h1>
+                </ion-label>
+                <ion-input [(ngModel)]="factura.direccion"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <div class="ion-padding">
+            <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Usar Mismos Datos Del Paciente</ion-button>
+        </div>
+
+    </header>
+
+    <header class="row">
+        <ion-list>
+            <ion-list-header>
+                <h1>Detalle</h1>
+            </ion-list-header>
+            <ion-item>
+                <ion-label>
+                    <h3>
+                        Consulta Medica:
+                    </h3>
+                    <h4>
+                        Dr(a). {{medico.nombre}} {{medico.apellido}}, {{medico.especialidad}}
+                    </h4>
+                </ion-label>
+                <ion-note slot="end" color="primary">
+                    <h3>{{factura.subtotal | number:'1.2-2'}}</h3>
+                </ion-note>
+            </ion-item>
+        </ion-list>
+    </header>
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                <h1>Total</h1>
+            </ion-label>
+            <ion-note slot="end" color="primary">
+                <h1>$ {{factura.total | number:'1.2-2'}}</h1>
+            </ion-note>
+        </ion-item>
+    </ion-list>
+    <ion-button color="primary" (click)="createPdf(factura, medico)">Descargar Factura</ion-button>
+    <div>
+        <ion-button color="light"><a href="javascript:window.print()">Imprimir</a></ion-button>
+    </div>
+
+    <!--.col-->
+
+    <div class="ion-padding">
+        <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Realizar El Pago</ion-button>
+    </div>
+
+</ion-content>

@@ -1,9 +1,59 @@
 <ion-header>
   <ion-toolbar class="color">
-    <ion-title class="title">create-diagnostico</ion-title>
+    <ion-title class="title">Crear Diagnostico</ion-title>
+    <ion-buttons slot="start">
+			<ion-button slot="icon-only" class="back-button" color="light" (click)="goBack()">
+				<ion-icon name="arrow-back"></ion-icon>
+			</ion-button>
+		</ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <div class="page__login h-100 bg__image">
+    <div class="ui__view__block">
+      <div class="content__centered p-0">
+        <div class="login-wrapper">
+          <ion-list>
+
+            <ion-card>
+              <ion-item>
+                <ion-label>Medicamento</ion-label>
+                <ion-select [(ngModel)]="prescripcionSelected" (ionChange)="onChange()" interface="action-sheet"
+                  placeholder="Seleccione" multiple="true">
+                  <ion-select-option *ngFor="let prescripcion of prescripciones | async" [value]="medicamento">
+
+                    <h3>{{prescripcion.medicamento}}</h3>
+                    <p>{{prescripcion.dosis}} </p>
+
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item lines="full">
+                <ion-label position="floating">Tipo</ion-label>
+                <ion-input type="text" required [(ngModel)]="diagnostico.tipo"></ion-input>
+              </ion-item>
+            </ion-card>
+
+            <ion-card>
+              <ion-item lines="full">
+                <ion-label position="floating">Descripcion</ion-label>
+                <ion-input type="text" required [(ngModel)]="diagnostico.descripcion"></ion-input>
+              </ion-item>
+            </ion-card>
+
+          </ion-list>
+
+          <div class="ion-padding">
+            <ion-button expand="block" shape="block" (click)="createDiagnostico()">Guardar</ion-button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 </ion-content>

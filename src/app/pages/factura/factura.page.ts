@@ -9,6 +9,12 @@ import { Usuario } from 'src/app/model/Usuario';
 import { Rol } from 'src/app/model/Rol';
 import { database } from 'firebase';
 import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { Platform } from '@ionic/angular';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-factura',
@@ -17,14 +23,26 @@ import { ConsultaService } from 'src/app/services/consulta-service/consulta.serv
 })
 export class FacturaPage implements OnInit {
 
-  consulta: Consulta;
+  consulta: Consulta  = {
+
+    uid: "",
+    pacienteUID: "",
+    medicoUID: "",
+    estado: "",
+    fecha: "",
+    diagnosticoUID: ""
+
+  }
+  
+  pdfObj = null;
+  
   factura: Factura = {
 
     uid: "",
     nombre: "",
     cedula_ruc: "",
     telefono: "",
-    fecha: "",
+    fecha: new Date().toISOString(),
     direccion: "",
     consultaUID: "",
     subtotal: 0,
@@ -41,12 +59,16 @@ export class FacturaPage implements OnInit {
 
   medico: Usuario = new Usuario();
 
+
   constructor(private facturaService: FacturaService,
               private consultaService: ConsultaService,
               private usuarioService: UsuarioService,
-              private route: ActivatedRoute, 
-              public router: Router, 
-              public auth: AuthenticationService) { }
+              private route: ActivatedRoute,
+              public router: Router,
+              public auth: AuthenticationService,
+              private file: File,
+              private fileOpener: FileOpener,
+              private plt: Platform) { }
 
   async ngOnInit() {
 
@@ -78,6 +100,97 @@ export class FacturaPage implements OnInit {
 
   }
 
+  async saveFactura() {
+    this.facturaService.addFactura(this.factura)
     
+    let auxConsulta: Consulta = {
+      uid: "",
+      pacienteUID: "",
+      medicoUID: "",
+      estado: "",
+      fecha: "",
+      diagnosticoUID: ""
+    }
+    auxConsulta = await this.consultaService.getConsulta(this.consulta.uid)
+    auxConsulta.estado = "Pagada, pendiente de atencion"
+    console.log("consulta uid: " + auxConsulta.uid)
+    console.log("consulta estado: " + auxConsulta.estado)
+
+    this.consultaService.updateConsulta2(auxConsulta)
+    
+    this.router.navigate(['list-consulta']);
+
+  }
+  /* CREACION PDF*/
+  createPdf(datos: any, datos3: any) {
+    console.log(datos);
+
+    const fecha = new Date().toISOString();
+    var docDefinition = {
+      content: [
+        { text: 'MEDICITE S.A.', style: 'header' },
+        { text: 'Cuenca-Ecuador', style: 'subheader' },
+        { text: 'medicite@gmail.com', style: 'subheader' },
+        { text: 'Telefono: 2828628', style: 'subheader' },
+        { text: 'RUC: 0106432503', style: 'subheader' },
+        { text: fecha  , alignment: 'right'},
+
+        { text: 'Datos Cliente', style: 'header' },
+
+        { text: 'Nombre y Apellidos:', style: 'subheader' },
+        { text: datos.nombre },
+
+        { text: 'Cedula:', style: 'subheader' },
+        { text: datos.cedula_ruc},
+
+        { text: 'Telefono:', style: 'subheader' },
+        { text: datos.telefono },
+
+        { text: 'Direccion:', style: 'subheader' },
+        { text: datos.direccion},
+        { text: ''},
+        { text: 'Detalles', style: 'header' },
+        { text: 'Consulta Medica'},
+        { text: 'Dr/a'}, { text: datos3.nombre},
+        { text: datos3.apellido},
+        { text: datos3.especialidad},
+
+        { text: 'Subtotal', style: 'header' },
+        { text:  datos.subtotal, alignment: 'right'},
+
+        { text: 'TOTAL', style: 'header' },
+        { text:  datos.total , alignment: 'right'}
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+        },
+        subheader: {
+          fontSize: 14,
+          bold: true,
+          margin: [0, 15, 0, 0]
+        },
+        story: {
+          italic: true,
+          alignment: 'center',
+          width: '50%',
+        }
+      }
+    };
+    this.pdfObj = pdfMake.createPdf(docDefinition);
+    if (this.plt.is('cordova')) {
+      this.pdfObj.getBuffer((buffer) => {
+        var blob = new Blob([buffer], { type: 'application/pdf' });
+
+        this.file.writeFile(this.file.dataDirectory, 'myletter.pdf', blob, { replace: true }).then(fileEntry => {
+          this.fileOpener.open(this.file.dataDirectory + 'myletter.pdf', 'application/pdf');
+        });
+      });
+    } else {
+      this.pdfObj.download();
+    }
+  }
+  /* FIN CREACION PDF*/
 
 }

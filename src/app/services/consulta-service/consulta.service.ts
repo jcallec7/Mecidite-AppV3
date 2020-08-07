@@ -66,14 +66,22 @@ export class ConsultaService {
     return this.consultas;
   }
 
-  getConsulta(uid: string): Observable<Consulta> {
-    return this.consultaCollection.doc<Consulta>(uid).valueChanges().pipe(
-        take(1),
-        map(consulta => {
-          consulta.uid = uid;
-          return consulta;
-        })
-    );
+  async getConsulta(uid: string): Promise<Consulta> {
+    try{
+      let aux:any = await this.afs.collection("consultas", 
+          ref => ref.where('uid', '==', uid))
+                    .valueChanges().pipe(first()).toPromise().then(doc => {                    	  
+                        return doc;
+                    }).catch(error => {
+                        throw error;
+                    });
+      if(aux.length==0)
+          return undefined;
+      return aux[0];
+  }catch(error){
+    console.error("Error", error);
+    throw error;
+  } 
   }
 
   addConsulta(consulta: Consulta): Promise<DocumentReference> {
@@ -81,11 +89,15 @@ export class ConsultaService {
     return this.consultaCollection.add(consulta);
   }
 
-  updateNote(consulta: Consulta): Promise<void> {
-    return this.consultaCollection.doc(consulta.uid).update({ estado: consulta.estado, fecha: consulta.fecha });
+  updateConsulta(consulta: Consulta): Promise<void> {
+    return this.consultaCollection.doc(consulta.uid).update({ estado: consulta.estado });
   }
 
-  deleteNote(uid: string): Promise<void> {
+  updateConsulta2(consulta: Consulta) {
+    this.afs.collection('consultas').doc(consulta.uid).set({ estado: consulta.estado });
+  }
+
+  deleteConsulta(uid: string): Promise<void> {
     return this.consultaCollection.doc(uid).delete();
   }
 
