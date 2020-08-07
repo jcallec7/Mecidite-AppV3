@@ -135,6 +135,7 @@ export class FormRegisterPage implements OnInit {
 
       }else{
         this.showMessage = true
+        this.messageEmail=""
       }
     })
 

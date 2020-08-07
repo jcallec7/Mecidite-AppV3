@@ -67,7 +67,7 @@
             <ion-item>
                 <ion-label>
                     <h3>
-                        Consulta Medica: 
+                        Consulta Medica:
                     </h3>
                     <h4>
                         Dr(a). {{medico.nombre}} {{medico.apellido}}, {{medico.especialidad}}
@@ -89,10 +89,8 @@
             </ion-note>
         </ion-item>
     </ion-list>
-
-    <div>
-        <ion-button color="light"><a href="javascript:window.print()">Imprimir</a></ion-button>
-    </div>
+    <ion-button color="primary" (click)="createPdf(factura,medico)">Descargar Factura</ion-button>
+    
     <ion-button color="light">GENERAR PDF</ion-button>
     <!--.col-->
 
