@@ -28,14 +28,23 @@ export class AppComponent implements OnInit {
  
       title: 'Configuración',
       url: '/folder/Favorites',
-      icon: 'settings-outline'
+      icon: 'settings'
     },
     {
       title: 'Contáctanos',
       url: '/folder/Archived',
       icon: 'archive'
     },
- 
+    {
+      title: 'Nueva Consulta',
+      url: '/create-consulta',
+      icon: 'add'
+    },
+    {
+      title: 'Mis Consultas',
+      url: '/list-consulta',
+      icon: 'list'
+    },
   ];
 
   constructor(
