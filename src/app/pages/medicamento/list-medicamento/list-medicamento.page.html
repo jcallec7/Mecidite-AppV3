@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Medicamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let medicamento of medicamentos | async; trackBy: trackByFn; let i = index">
+      <ion-label>
+        <h2>{{medicamento.nombre}}</h2>
+        <p> {{medicamento.concentracion}}</p>
+        <div class="item-note" item-end>
+
+          <ion-button (click)="editFunc(medicamento)">Edit</ion-button>
+          <ion-button (click)="deleteMedicamento(medicamento.uid)" color="danger">Delete</ion-button>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="showCrearMedicamento()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+
+</ion-content>

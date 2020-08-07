@@ -38,7 +38,8 @@ const routes: Routes = [
   {
     path: 'form-register',
     loadChildren: () => import('./pages/register/form-register/form-register.module').then( m => m.FormRegisterPageModule)
-  },  {
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
@@ -49,7 +50,43 @@ const routes: Routes = [
   {
     path: 'factura',
     loadChildren: () => import('./pages/factura/factura.module').then( m => m.FacturaPageModule)
-  }
+  },  {
+    path: 'create-medicamento',
+    loadChildren: () => import('./pages/medicamento/create-medicamento/create-medicamento.module').then( m => m.CreateMedicamentoPageModule)
+  },
+  {
+    path: 'list-medicamento',
+    loadChildren: () => import('./pages/medicamento/list-medicamento/list-medicamento.module').then( m => m.ListMedicamentoPageModule)
+  },
+  {
+    path: 'delete-medicamento',
+    loadChildren: () => import('./pages/medicamento/delete-medicamento/delete-medicamento.module').then( m => m.DeleteMedicamentoPageModule)
+  },
+  {
+    path: 'create-md',
+    loadChildren: () => import('./pages/medicamento-detalle/create-md/create-md.module').then( m => m.CreateMdPageModule)
+  },
+  {
+    path: 'list-md',
+    loadChildren: () => import('./pages/medicamento-detalle/list-md/list-md.module').then( m => m.ListMdPageModule)
+  },
+  {
+    path: 'delete-md',
+    loadChildren: () => import('./pages/medicamento-detalle/delete-md/delete-md.module').then( m => m.DeleteMdPageModule)
+  },
+  {
+    path: 'create-diagnostico',
+    loadChildren: () => import('./pages/diagnostico/create-diagnostico/create-diagnostico.module').then( m => m.CreateDiagnosticoPageModule)
+  },
+  {
+    path: 'list-diagnostico',
+    loadChildren: () => import('./pages/diagnostico/list-diagnostico/list-diagnostico.module').then( m => m.ListDiagnosticoPageModule)
+  },
+  {
+    path: 'delete-diagnostico',
+    loadChildren: () => import('./pages/diagnostico/delete-diagnostico/delete-diagnostico.module').then( m => m.DeleteDiagnosticoPageModule)
+  },
+
 
 
 
