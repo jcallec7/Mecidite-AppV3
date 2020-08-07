@@ -15,42 +15,45 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
+<<<<<<< HEAD
       title: 'Inbox',
       url: '/folder/Inbox',
       icon: 'mail'
-    },
-    {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
-    },   
+    },  
     {
       title: 'Nueva Consulta',
       url: '/create-consulta',
       icon: 'add'
     },
     {
-      title: 'Favorites',
-      url: '/folder/Favorites',
-      icon: 'heart'
+      title: 'Mis Consultas',
+      url: '/list-consulta',
+      icon: 'list'
+    }
+=======
+      title: 'Inicio',
+      url: 'home',
+      icon: 'home'
     },
     {
-      title: 'Archived',
+      title: 'Perfil',
+      url: '/folder/Outbox',
+      icon: 'person'
+    },   
+    {
+ 
+      title: 'Configuración',
+      url: '/folder/Favorites',
+      icon: 'settings-outline'
+    },
+    {
+      title: 'Contáctanos',
       url: '/folder/Archived',
       icon: 'archive'
     },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
-    }
+ 
+>>>>>>> b640437a2b9e01dfdcb29bfba8ac7cdab385ccc2
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -75,9 +78,9 @@ export class AppComponent implements OnInit {
       this.auth.getCurrentUser().then(user=>{
         console.log(user)
         if(user){
-          this.router.navigate(['home'])
+         // this.router.navigate(['home'])
         }else{
-          this.router.navigate(['welcome'])
+         //this.router.navigate(['welcome'])
         }
 
       }

@@ -1,37 +1,11 @@
-<ion-app>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-botton>
-        <ion-icon name='home'></ion-icon>
-        
-      </ion-tab-botton>
-      <ion-tab-botton>
-        <ion-icon name='heart'></ion-icon>
-        
-      </ion-tab-botton>
-      <ion-tab-botton>
-        <ion-icon name="information-circle-outline"></ion-icon>
-        
-      </ion-tab-botton>
-      <ion-tab-botton>
-        <ion-icon name='person'></ion-icon>
-        <ion-label></ion-label>
-      </ion-tab-botton>
-    </ion-tab-bar>
-  </ion-tabs>
   <ion-header>
-    <ion-toolbar class="primary">
-      <img src="../../../assets/images/logoBlanco.png"  width="170px" height="48px" text-center>
-      <ion-buttons slot="end">
-        <ion-button color="light">
-          <ion-icon name="menu" ></ion-icon>
-        </ion-button>
-      </ion-buttons>
+    <ion-toolbar class="new-background-color">
+      <ion-title><img src="../../../assets/images/logoBlanco.png" width="170px" height="48px" text-center></ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  
-  
+
+
+
   <ion-content>
     <section class="intro animated fadeIn" *ngIf="showReminder">
       <img src="../../../assets/images/doctor-intro.jpg" alt="doctor intro">
@@ -81,7 +55,7 @@
     <!-- Social -->
     <section>
       <ion-label class="section__title" slot="start">
-        Social Network
+        <div class="title">Community</div>
       </ion-label>
       <div class="overscroll-wrapper">
         <ion-slides class="slides__dashboard social" [options]="socialSlideOpts">
@@ -245,7 +219,5 @@
     
   </ion-content>
   <ion-footer class="flat">
-    <footer-tabs></footer-tabs>
+  
   </ion-footer>
-</ion-app>
-

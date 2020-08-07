@@ -4,10 +4,10 @@ import { Diagnostico } from './Diagnostico';
 export class Consulta {
 
     uid: string;
-    paciente: Usuario;
-    medico: Usuario;
+    pacienteUID: string;
+    medicoUID: string;
     estado: string;
     fecha: string;
-    diagnostico: Diagnostico;
+    diagnosticoUID: string;
 
 }

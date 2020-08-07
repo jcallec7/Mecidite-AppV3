@@ -26,10 +26,21 @@ export class ConsultaService {
     ); 
   }
 
+  getConsultasByMedicoUID(uid: string): Observable<any[]> {
+    return this.afs.collection('consultas',
+      ref => ref.where('medicoUID', '==', uid))
+      .valueChanges();
+  }
+
+  getConsultasByPacienteUID(uid: string): Observable<any[]> {
+    return this.afs.collection('consultas',
+      ref => ref.where('pacienteUID', '==', uid))
+      .valueChanges();
+  }
+
   getMedicos(): Observable<any[]> {
     return this.afs.collection('usuarios',
-      ref => ref.where('rol', '==', 
-      this.afs.collection('roles').doc('medico').ref))
+      ref => ref.where('rol', '==', '2'))
       .valueChanges();
   }
 
@@ -66,6 +77,7 @@ export class ConsultaService {
   }
 
   addConsulta(consulta: Consulta): Promise<DocumentReference> {
+    consulta.uid = this.afs.createId();
     return this.consultaCollection.add(consulta);
   }
 

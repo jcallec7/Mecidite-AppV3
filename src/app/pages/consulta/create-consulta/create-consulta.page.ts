@@ -16,16 +16,15 @@ export class CreateConsultaPage implements OnInit {
   consulta: Consulta  = {
 
     uid: "",
-    paciente: null,
-    medico: null,
+    pacienteUID: "",
+    medicoUID: "",
     estado: "",
     fecha: new Date().toISOString(),
-    diagnostico: null
+    diagnosticoUID: ""
 
   }
 
   fechamax: string;
-  paciente: Observable<any>;
   medicos: Observable<Usuario[]>;
   medicoSelected: Usuario;
 
@@ -38,7 +37,7 @@ export class CreateConsultaPage implements OnInit {
 
     this.medicos = this.consultaService.getMedicos();
 
-		console.log("consulta inicializada: " + JSON.stringify(this.consulta))
+		//console.log("consulta inicializada: " + JSON.stringify(this.consulta))
     
     const d = new Date();
     d.setDate(d.getDate() + 60);
@@ -52,41 +51,35 @@ export class CreateConsultaPage implements OnInit {
 
   async createConsulta() {
 
-    this.consulta.medico = this.medicoSelected;
-
     // cargar datos de la sesion:
     
     console.log("obteniendo datos paciente ");
     this.auth.getCurrentUser().then(user => {
       console.log(user)
       if(user){
-        console.log("Usuario rescatado la pucta madre!!")
-        this.paciente = user
+        this.consulta.medicoUID = this.medicoSelected.uid;
+        this.consulta.pacienteUID = user['uid']
+        this.consulta.estado = "Creada, pendiente de pago";
+        //console.log("Consulta Usuario uid: " + this.consulta.pacienteUID)
+        let navigationExtras: NavigationExtras = {
+          state: {
+              consulta: this.consulta
+          }
+        };
+        this.consultaService.addConsulta(this.consulta);   
+        this.router.navigate(["/factura"], navigationExtras);
       }else{
         console.log("Usuario no rescatado")
-        //this.router.navigate(['welcome'])
+        this.router.navigate(['welcome'])
       }
 
-    }
-    );
-    console.log("User recuperado: " + this.paciente);
-    //this.consulta.paciente = await this.paciente;
-    console.log("Paciente: " + this.consulta.paciente.nombre);
-    console.log("Medico: " + this.medicoSelected.uid);
+    });
 
-    //
-    this.consulta.estado = "Creada, pendiente de pago";
+    
 
-    console.log("sending consult: " + this.consulta ) ;
+    //console.log("sending consult (Paciente UID): " + this.consulta.pacienteUID) ;
 
-    /*let navigationExtras: NavigationExtras = {
-      queryParams: {
-          'consulta': this.consulta
-      }
-    };*/
-    //this.consultaService.createConsulta(this.consulta, this.medicoSelected.uid, this.consulta.paciente.uid);
-
-    //this.router.navigate([`factura/${this.consulta}`]);
+    
 
   }
 

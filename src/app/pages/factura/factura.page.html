@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2-4">
-                    <div class="slogan"> Facturación</div>
+                    <div class="slogan">Factura</div>
                 </div>
                 <!--.row-->
             </div>
@@ -29,65 +29,54 @@
         <ion-list lines="full" class="ion-no-margin ion-no-padding">
             <ion-item>
                 <ion-label position="stacked">
-                    <h1>Nombres</h1>
+                    <h1>Nombre Completo</h1>
                 </ion-label>
-                <ion-input> Paulo Mateo</ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="stacked">
-                    <h1>Apellidos</h1>
-                </ion-label>
-                <ion-input> Gonzalez Arias</ion-input>
+                <ion-input [(ngModel)]="factura.nombre"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked">
                     <h1>Cedula/RUC</h1>
                 </ion-label>
-                <ion-input>0106432503</ion-input>
+                <ion-input [(ngModel)]="factura.cedula_ruc"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="stacked">
                     <h1>Telefono/Celular</h1>
                 </ion-label>
-                <ion-input>0106432503</ion-input>
+                <ion-input [(ngModel)]="factura.telefono"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="stacked">
+                    <h1>Direccion</h1>
+                </ion-label>
+                <ion-input [(ngModel)]="factura.direccion"></ion-input>
             </ion-item>
         </ion-list>
+
+        <div class="ion-padding">
+            <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Usar Mismos Datos Del Paciente</ion-button>
+        </div>
 
     </header>
 
     <header class="row">
         <ion-list>
             <ion-list-header>
-                <h1>Detalles</h1>
+                <h1>Detalle</h1>
             </ion-list-header>
             <ion-item>
                 <ion-label>
-                    <h3>Consulta Medica</h3>
+                    <h3>
+                        Consulta Medica: 
+                    </h3>
+                    <h4>
+                        Dr(a). {{medico.nombre}} {{medico.apellido}}, {{medico.especialidad}}
+                    </h4>
                 </ion-label>
                 <ion-note slot="end" color="primary">
-                    <h3>99</h3>
+                    <h3>{{factura.subtotal | number:'1.2-2'}}</h3>
                 </ion-note>
             </ion-item>
-
-            <ion-item>
-                <ion-label>
-                    <h3>parecetamol</h3>
-                </ion-label>
-                <ion-note slot="end" color="primary">
-                    <h3>55</h3>
-                </ion-note>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>
-                    <h3>cebion</h3>
-                </ion-label>
-                <ion-note slot="end" color="primary">
-                    <h3>88</h3>
-                </ion-note>
-            </ion-item>
-
-
         </ion-list>
     </header>
     <ion-list>
@@ -96,7 +85,7 @@
                 <h1>Total</h1>
             </ion-label>
             <ion-note slot="end" color="primary">
-                <h1>99</h1>
+                <h1>$ {{factura.total | number:'1.2-2'}}</h1>
             </ion-note>
         </ion-item>
     </ion-list>
@@ -106,5 +95,9 @@
     </div>
     <ion-button color="light">GENERAR PDF</ion-button>
     <!--.col-->
+
+    <div class="ion-padding">
+        <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Realizar El Pago</ion-button>
+    </div>
 
 </ion-content>
