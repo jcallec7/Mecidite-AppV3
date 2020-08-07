@@ -5,6 +5,6 @@ export class Diagnostico {
     uid: string;
     tipo: string;
     descripcion: string;
-    prescripcion: string[];
+    prescripcionUID: string[];
 
 }
