@@ -117,3 +117,20 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+.app-info {
+  text-align: center;
+  padding: 2rem 0 4rem;
+  color: var(--ion-color-medium);
+
+  h6 {
+    margin: 0 0 4px;
+    font-size: 14px;
+  }
+
+  small {
+    display: block;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+}

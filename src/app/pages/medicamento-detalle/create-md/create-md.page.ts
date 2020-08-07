@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Medicamento } from 'src/app/model/Medicamento';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-md',
@@ -20,7 +21,8 @@ export class CreateMdPage implements OnInit {
   constructor(
     private mdService: MdServiceService,
     private route: ActivatedRoute,
-    public router: Router) { }
+    public router: Router,
+    private nav: NavController) { }
 
     ngOnInit() {
       this.medicamentos = this.mdService.getMedicamentos();
@@ -35,6 +37,9 @@ export class CreateMdPage implements OnInit {
       
       //console.log("Medicamento = " + this.md.medicamento.uid);
       //this.router.navigate(['lista-empleos'])
+    }
+    goBack() {
+      this.nav.back();
     }
   
   
