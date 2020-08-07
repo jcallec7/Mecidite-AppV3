@@ -10,6 +10,7 @@ export class Usuario {
     fecha_nac: string;
     especialidad: string;
     telf: string;
+    tipoSangre: string;
     direccion: string;
     peso: string;
     estatura: string;

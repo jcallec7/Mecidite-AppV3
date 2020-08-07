@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR } from '@angular/core';
 import { Usuario } from 'src/app/model/Usuario';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterService } from 'src/app/services/register/register.service';
 import { Rol } from 'src/app/model/Rol';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-register',
@@ -23,13 +24,13 @@ export class FormRegisterPage implements OnInit {
 
   email: string
 
-  base64: string 
-
-  dataUpload: Promise<any>
-
   passwordToggleIcon = 'eye-outline'
+
+  messageEmail = ""
+
+  showMessage = true
   
-  constructor(private route: ActivatedRoute, private router: Router, private RegisterService: RegisterService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private RegisterService: RegisterService, private alert: AlertController) { }
 
   ngOnInit() {
 
@@ -48,10 +49,11 @@ export class FormRegisterPage implements OnInit {
       fecha_nac: "",
       especialidad: "",
       telf: "",
+      tipoSangre:"",
       direccion: "",
       peso: "",
       estatura: "",
-      rol: "",
+      rol: this.rol[0].uid,
       photoURL: ""
   
     }
@@ -66,15 +68,42 @@ export class FormRegisterPage implements OnInit {
     
   }
 
-  redirect(){
+  async redirect(){
 
-    this.usuario.rol = this.rol[0].uid;
-   
-    this.RegisterService.insertUsuario(this.usuario, this.email, this.password)
+    if(this.usuario.cedula!="" && this.usuario.nombre!="" && this.usuario.apellido!="" && this.email != "" && 
+    this.password!="" && this.usuario.fecha_nac!="" && this.usuario.direccion!="" && this.usuario.telf!="" && 
+    this.usuario.sexo!= "" && this.usuario.peso!="" && this.usuario.estatura!="" && this.usuario.tipoSangre!=""){
+
+      this.RegisterService.insertUsuario(this.usuario, this.email, this.password)
     
-    this.router.navigate(['home'])
+      this.router.navigate(['home'])
 
 
+    }else if(this.usuario.cedula!="" && this.usuario.nombre!="" && this.usuario.apellido!="" && this.email != "" && 
+    this.password!="" && this.usuario.fecha_nac!="" && this.usuario.direccion!="" && this.usuario.telf!="" && 
+    this.usuario.sexo!= "" && this.usuario.especialidad!=""){
+
+      this.RegisterService.insertUsuario(this.usuario, this.email, this.password)
+    
+      this.router.navigate(['home'])
+
+
+    }else{
+
+      const alert = await this.alert.create({
+        header: 'Ups!',
+        message: 'Necesitas llenar toda tu información',
+        buttons: [
+          {
+            text: 'OK'
+          }
+        ],
+      });
+  
+      await alert.present()
+
+      
+    }
   }
 
   togglePassword(){
@@ -91,6 +120,28 @@ export class FormRegisterPage implements OnInit {
 
     }
     
+  }
+
+  async checkEmail(){
+
+    const check = this.RegisterService.checkEmail(this.email)
+
+    ;(await check).subscribe(data=>{
+      console.log(data[0])
+      if(data[0]!=undefined){
+
+        this.showMessage = false
+        this.messageEmail="El correo que usted ingresó ya se encuentra registrado"
+
+      }else{
+        this.showMessage = true
+      }
+    })
+
+    
+   
+
+
   }
 
 }
