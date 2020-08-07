@@ -40,7 +40,18 @@ export class ListConsultaPage implements OnInit {
         if(this.usuario.rol == '2') {
           this.consultas = this.consultaService.getConsultasByMedicoUID(uid)
         } else if (this.usuario.rol == '3') {
-          this.consultas = this.consultaService.getConsultasByPacienteUID(uid) 
+          this.consultas = this.consultaService.getConsultasByPacienteUID(uid)
+
+          this.consultas.subscribe(data => {
+            //let c: Consulta = data
+            //console.log("consulta recuperada?: " + JSON.stringify(data))
+            data.forEach(data2 => {
+              let c: Consulta = data2
+              console.log("consulta recuperada?: " + c.medicoUID)
+            })
+          })
+
+
         }
 
       }else{
