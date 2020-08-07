@@ -39,10 +39,18 @@ export class DiagnosticoServiceService {
 
   //getDiagnostico(uid:string): Observable<Diagnostico>{}
 
-  addConsulta(diagnostico: Diagnostico): Promise<DocumentReference> {
+  createDiagnostico(diagnostico: Diagnostico, prescripcionId: string) {
+    
+    const refConsulta = this.afs.collection('diagnostico');
     diagnostico.uid = this.afs.createId();
-    return this.diagnosticoCollection.add(diagnostico);
+    const param = JSON.parse(JSON.stringify(diagnostico));
+    refConsulta.doc(diagnostico.uid).set(param, {merge: true} );
+
+    this.afs.collection("diagnostico").doc(diagnostico.uid).update({
+      medicamento: this.afs.collection("medicamento-detalle").doc(prescripcionId).ref});
+
   }
+  
 
   deleteNote(uid: string): Promise<void> {
     return this.diagnosticoCollection.doc(uid).delete();
