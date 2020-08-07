@@ -8,6 +8,8 @@ import { AuthenticationService } from 'src/app/services/login/authentication.ser
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class RegisterService {
 
   constructor(private afAuth: AngularFireAuth,
@@ -18,6 +20,12 @@ export class RegisterService {
   getRol(uid: string): Observable<any[]>{
 
     return this.afs.collection("roles",ref => ref.where("uid","==",uid)).valueChanges();
+
+  }
+
+  async checkEmail(email: string){
+
+    return this.afs.collection('usuarios', ref => ref.where("email", "==", email)).valueChanges();
 
   }
 

@@ -9,18 +9,19 @@
             <h6>Necesitamos información basica sobre ti</h6>
           </div>
   
-         <!-- <ion-card>
+          <!--<ion-card>
             <ion-item>
               <app-image-upload [icon]="'camera'" (uploadFinished)="getImage($event)"></app-image-upload>
             </ion-item>
           </ion-card> --> 
-
+          
           <ion-card>
             <ion-item>
               <ion-label position="floating">Cedula</ion-label>
               <ion-input [(ngModel)]="usuario.cedula"></ion-input>
             </ion-item>
           </ion-card>
+
           <ion-card>
             <ion-item>
               <ion-label position="floating">Nombre</ion-label>
@@ -38,7 +39,10 @@
           <ion-card>
             <ion-item>
               <ion-label position="floating">Correo</ion-label>
-              <ion-input [(ngModel)]="email"></ion-input>
+              <ion-input type="email" [(ngModel)]="email" (keyup)="checkEmail()"></ion-input>
+            </ion-item>
+            <ion-item [hidden] = "showMessage ? true : false">
+            <p style="color:#FF0000">{{messageEmail}}</p>
             </ion-item>
           </ion-card>
 
@@ -73,20 +77,24 @@
           <ion-card>
             <ion-item>
               <ion-label position="floating">Sexo</ion-label>
-              <ion-input [(ngModel)]="usuario.sexo"></ion-input>
+              <ion-select [(ngModel)]="usuario.sexo">
+                <ion-select-option value="Masculino">Masculino</ion-select-option>
+                <ion-select-option value="Femenino">Femenino</ion-select-option>
+                <ion-select-option value="Intersexo">Intersexual</ion-select-option>
+            </ion-select>
             </ion-item>
           </ion-card>
 
           <ion-card [hidden] = "showCard ? true : false">
             <ion-item>
-              <ion-label position="floating">Peso</ion-label>
+              <ion-label position="floating">Peso (kg)</ion-label>
               <ion-input [(ngModel)]="usuario.peso"></ion-input>
             </ion-item>
           </ion-card>
 
           <ion-card [hidden] = "showCard ? true : false">
             <ion-item>
-              <ion-label position="floating">Estatura</ion-label>
+              <ion-label position="floating">Estatura (cm)</ion-label>
               <ion-input [(ngModel)]="usuario.estatura"></ion-input>
             </ion-item>
           </ion-card>
@@ -95,6 +103,22 @@
             <ion-item>
               <ion-label position="floating">Especialidad</ion-label>
               <ion-input [(ngModel)]="usuario.especialidad"></ion-input>
+            </ion-item>
+          </ion-card>
+          
+          <ion-card [hidden] = "showCard ? true : false">
+            <ion-item>
+              <ion-label position="floating">Tipo de sangre</ion-label>
+              <ion-select [(ngModel)]="usuario.tipoSangre">
+                  <ion-select-option value="A+">A+</ion-select-option>
+                  <ion-select-option value="B+">B+</ion-select-option>
+                  <ion-select-option value="O+">O+</ion-select-option>
+                  <ion-select-option value="AB+">AB+</ion-select-option>
+                  <ion-select-option value="A-">A-</ion-select-option>
+                  <ion-select-option value="B-">B-</ion-select-option>
+                  <ion-select-option value="O-">O-</ion-select-option>
+                  <ion-select-option value="AB-">AB-</ion-select-option>
+              </ion-select>
             </ion-item>
           </ion-card>
 
@@ -110,7 +134,7 @@
               <p>¿Tienes una cuenta? <a routerLink="/login" routerDirection="root">Inicia Sesión</a></p>
             </div>
           </div>
-
+          
         </div>
       </div>
     </div>
