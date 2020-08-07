@@ -25,14 +25,13 @@ export class FacturaPage implements OnInit {
 
   pdfObj = null;
   consulta: Consulta;
-  
   factura: Factura = {
 
     uid: "",
     nombre: "",
     cedula_ruc: "",
     telefono: "",
-    fecha: new Date().toISOString(),
+    fecha: "",
     direccion: "",
     consultaUID: "",
     subtotal: 0,
@@ -48,7 +47,6 @@ export class FacturaPage implements OnInit {
   paciente: Usuario = new Usuario();
 
   medico: Usuario = new Usuario();
-
 
   constructor(private facturaService: FacturaService,
               private consultaService: ConsultaService,
@@ -89,46 +87,27 @@ export class FacturaPage implements OnInit {
     this.factura.telefono = this.paciente.telf
 
   }
-
-  /* CREACION PDF*/
-  createPdf(datos: any, datos3: any) {
+  createPdf(datos: any) {
     console.log(datos);
-
-    const fecha = new Date().toISOString();
     var docDefinition = {
       content: [
         { text: 'MEDICITE S.A.', style: 'header' },
-        { text: 'Cuenca-Ecuador', style: 'subheader' },
-        { text: 'medicite@gmail.com', style: 'subheader' },
-        { text: 'Telefono: 2828628', style: 'subheader' },
-        { text: 'RUC: 0106432503', style: 'subheader' },
-        { text: fecha  , alignment: 'right'},
+        { text: new Date().toTimeString(), alignment: 'right' },
 
-        { text: 'Datos Cliente', style: 'header' },
-
-        { text: 'Nombre y Apellidos:', style: 'subheader' },
+        { text: 'Titulo Empleos:', style: 'subheader' },
         { text: datos.nombre },
 
-        { text: 'Cedula:', style: 'subheader' },
-        { text: datos.cedula_ruc},
+        { text: 'Descripcion y Salario:', style: 'subheader' }, datos.total ,
 
-        { text: 'Telefono:', style: 'subheader' },
-        { text: datos.telefono },
+        { text: datos.salario , style: 'story', margin: [0, 20, 0, 20] },
 
-        { text: 'Direccion:', style: 'subheader' },
-        { text: datos.direccion},
-        { text: ''},
-        { text: 'Detalles', style: 'header' },
-        { text: 'Consulta Medica'},
-        { text: 'Dr/a'}, { text: datos3.nombre},
-        { text: datos3.apellido},
-        { text: datos3.especialidad},
-
-        { text: 'Subtotal', style: 'header' },
-        { text:  datos.subtotal, alignment: 'right'},
-
-        { text: 'TOTAL', style: 'header' },
-        { text:  datos.total , alignment: 'right'}
+        {
+          ul: [
+            'Cosas Extra:',
+            'Cosas Extra:',
+            'Cosas Extra:',
+          ]
+        }
       ],
       styles: {
         header: {
@@ -160,6 +139,8 @@ export class FacturaPage implements OnInit {
       this.pdfObj.download();
     }
   }
-  /* FIN CREACION PDF*/
+
+  downloadPdf() {
+  }
 
 }

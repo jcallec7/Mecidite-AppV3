@@ -32,7 +32,7 @@ export class FacturaPage implements OnInit {
     nombre: "",
     cedula_ruc: "",
     telefono: "",
-    fecha: new Date().toISOString(),
+    fecha: "",
     direccion: "",
     consultaUID: "",
     subtotal: 0,
@@ -89,12 +89,9 @@ export class FacturaPage implements OnInit {
     this.factura.telefono = this.paciente.telf
 
   }
-
-  /* CREACION PDF*/
   createPdf(datos: any, datos3: any) {
     console.log(datos);
-
-    const fecha = new Date().toISOString();
+    const fecha = new Date().getDay;
     var docDefinition = {
       content: [
         { text: 'MEDICITE S.A.', style: 'header' },
@@ -102,30 +99,33 @@ export class FacturaPage implements OnInit {
         { text: 'medicite@gmail.com', style: 'subheader' },
         { text: 'Telefono: 2828628', style: 'subheader' },
         { text: 'RUC: 0106432503', style: 'subheader' },
+
+
         { text: fecha  , alignment: 'right'},
 
         { text: 'Datos Cliente', style: 'header' },
-
+       
         { text: 'Nombre y Apellidos:', style: 'subheader' },
         { text: datos.nombre },
 
         { text: 'Cedula:', style: 'subheader' },
         { text: datos.cedula_ruc},
-
+        
         { text: 'Telefono:', style: 'subheader' },
         { text: datos.telefono },
 
         { text: 'Direccion:', style: 'subheader' },
         { text: datos.direccion},
-        { text: ''},
+
         { text: 'Detalles', style: 'header' },
         { text: 'Consulta Medica'},
-        { text: 'Dr/a'}, { text: datos3.nombre},
+        { text: datos3.nombre},
         { text: datos3.apellido},
         { text: datos3.especialidad},
+        { text: datos.subtotal , alignment: 'right'},
 
         { text: 'Subtotal', style: 'header' },
-        { text:  datos.subtotal, alignment: 'right'},
+        { text:  datos.subtotal , alignment: 'right'},
 
         { text: 'TOTAL', style: 'header' },
         { text:  datos.total , alignment: 'right'}
@@ -160,6 +160,5 @@ export class FacturaPage implements OnInit {
       this.pdfObj.download();
     }
   }
-  /* FIN CREACION PDF*/
 
 }

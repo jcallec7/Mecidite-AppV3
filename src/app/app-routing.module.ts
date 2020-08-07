@@ -50,7 +50,8 @@ const routes: Routes = [
   {
     path: 'factura',
     loadChildren: () => import('./pages/factura/factura.module').then( m => m.FacturaPageModule)
-  },  {
+  },
+  {
     path: 'create-medicamento',
     loadChildren: () => import('./pages/medicamento/create-medicamento/create-medicamento.module').then( m => m.CreateMedicamentoPageModule)
   },
@@ -87,9 +88,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/diagnostico/delete-diagnostico/delete-diagnostico.module').then( m => m.DeleteDiagnosticoPageModule)
   },
   {
-    path: 'account',
-    loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule)
+    path: 'show-account',
+    loadChildren: () => import('./pages/account/show-account/account.module').then( m => m.AccountPageModule)
+  },  {
+    path: 'edit-account',
+    loadChildren: () => import('./pages/account/edit-account/edit-account.module').then( m => m.EditAccountPageModule)
   },
+
 
 
 

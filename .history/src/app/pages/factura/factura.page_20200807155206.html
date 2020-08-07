@@ -89,8 +89,15 @@
             </ion-note>
         </ion-item>
     </ion-list>
-    <ion-button color="primary" (click)="createPdf(factura,medico)">Descargar Factura</ion-button>
+    <ion-button color="primary" (click)="createPdf(factura,consulta)">Descargar Factura</ion-button>
     <div>
         <ion-button color="light"><a href="javascript:window.print()">Imprimir</a></ion-button>
     </div>
+
+    <!--.col-->
+
+    <div class="ion-padding">
+        <ion-button expand="block" shape="block" (click)="fillWithCurrentData()">Realizar El Pago</ion-button>
+    </div>
+
 </ion-content>

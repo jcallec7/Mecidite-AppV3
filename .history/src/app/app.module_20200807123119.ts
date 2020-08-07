@@ -15,8 +15,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 import { Camera } from '@ionic-native/camera/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 
 @NgModule({
@@ -35,9 +33,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     StatusBar,
     SplashScreen,
     Camera,
-    File,
-    FileOpener,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }  
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
