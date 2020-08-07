@@ -11,14 +11,18 @@
 
 <ion-content fullscreen>
 
+  <!--<div *ngIf="consultas.length == 0">
+    <h1>No se han registrado consultas todavia !</h1>
+  </div>-->
+
   <ion-list>
 
     <ion-item *ngFor="let consulta of consultas | async">
       <ion-label>
 
         <h3>{{consulta.uid}}</h3>
-        <p>Medico: {{consulta.medicoUID}}</p>
-        <p>Paciente: {{consulta.pacienteUID}}</p>
+        <p *ngIf="usuario.rol == '3'">Medico: {{consulta.medicoUID}}</p>
+        <p *ngIf="usuario.rol == '2'">Paciente: {{consulta.pacienteUID}}</p>
         <p>Fecha: {{consulta.fecha}}</p>
         <p>Estado: {{consulta.estado}}</p>
 

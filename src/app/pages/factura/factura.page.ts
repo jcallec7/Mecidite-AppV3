@@ -23,8 +23,18 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class FacturaPage implements OnInit {
 
+  consulta: Consulta  = {
+
+    uid: "",
+    pacienteUID: "",
+    medicoUID: "",
+    estado: "",
+    fecha: "",
+    diagnosticoUID: ""
+
+  }
+  
   pdfObj = null;
-  consulta: Consulta;
   
   factura: Factura = {
 
@@ -90,6 +100,27 @@ export class FacturaPage implements OnInit {
 
   }
 
+  async saveFactura() {
+    this.facturaService.addFactura(this.factura)
+    
+    let auxConsulta: Consulta = {
+      uid: "",
+      pacienteUID: "",
+      medicoUID: "",
+      estado: "",
+      fecha: "",
+      diagnosticoUID: ""
+    }
+    auxConsulta = await this.consultaService.getConsulta(this.consulta.uid)
+    auxConsulta.estado = "Pagada, pendiente de atencion"
+    console.log("consulta uid: " + auxConsulta.uid)
+    console.log("consulta estado: " + auxConsulta.estado)
+
+    this.consultaService.updateConsulta2(auxConsulta)
+    
+    this.router.navigate(['list-consulta']);
+
+  }
   /* CREACION PDF*/
   createPdf(datos: any, datos3: any) {
     console.log(datos);
