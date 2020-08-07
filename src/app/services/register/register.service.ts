@@ -21,7 +21,7 @@ export class RegisterService {
 
   }
 
-  async insertUsuario(usuario: Usuario, document: string, email: string, password: string){
+  async insertUsuario(usuario: Usuario, email: string, password: string){
 
     try{
 
@@ -31,10 +31,6 @@ export class RegisterService {
       const refUser = this.afs.collection("usuarios")
       const param = JSON.parse(JSON.stringify(usuario))
       refUser.doc(usuario.uid).set(param)
-
-      this.afs.collection("usuarios").doc(usuario.uid).update({
-        rol: this.afs.collection("roles").doc(document).ref
-      })
 
       const user = await this.afAuth.currentUser;
 

@@ -36,8 +36,8 @@ export class ImageUploadComponent implements OnInit {
 
     console.log("options", options);
     const base64 = await this.camera.getPicture(options);
-    
-    this.startUpload(base64);
+
+    this.uploadFinished.emit(base64)
 
   }
 
@@ -99,7 +99,8 @@ export class ImageUploadComponent implements OnInit {
           downloadURL.subscribe(url => {
             data.url= url;
             console.log("donload terminado", url);
-            this.uploadFinished.emit(data);
+            return data.url
+            //this.uploadFinished.emit(data);
           });
         })
       )

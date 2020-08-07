@@ -4,9 +4,10 @@ export class Factura {
     uid: string;
     nombre: string;
     cedula_ruc: string;
-    fecha: Date;
+    telefono: string
+    fecha: string;
     direccion: string;
-    consulta: Consulta;
+    consultaUID: string;
     subtotal: number;
     total: number;
 }

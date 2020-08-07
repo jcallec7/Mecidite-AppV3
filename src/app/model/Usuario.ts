@@ -13,6 +13,7 @@ export class Usuario {
     direccion: string;
     peso: string;
     estatura: string;
-    rol: Rol;
+    rol: string;
+    photoURL: string;
 
 }

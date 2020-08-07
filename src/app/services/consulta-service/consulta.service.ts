@@ -66,6 +66,7 @@ export class ConsultaService {
   }
 
   addConsulta(consulta: Consulta): Promise<DocumentReference> {
+    consulta.uid = this.afs.createId();
     return this.consultaCollection.add(consulta);
   }
 
