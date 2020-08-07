@@ -2,6 +2,6 @@ import { Medicamento } from './Medicamento';
 
 export class MedicamentoDetalle {
     uid: string;
-    medicamento: Medicamento;
+    medicamentoUID: string;
     dosis: string;
 }

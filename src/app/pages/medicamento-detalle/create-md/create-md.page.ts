@@ -32,21 +32,8 @@ export class CreateMdPage implements OnInit {
       console.log("Selected: " + this.medicamentoSelected + " uid: " + this.medicamentoSelected.uid);
     }
   
-    async createMediDetalle() {
-      this.mdService.createMediDetalle(this.md, this.medicamentoSelected.uid);
-      
-      //console.log("Medicamento = " + this.md.medicamento.uid);
-      //this.router.navigate(['lista-empleos'])
-    }
-
-    public saveFruit(md: MedicamentoDetalle){
-      let key = this.afDB.list('/fruits/').push(md).key;
-      //Guardamos la fruta y obetenemos el id que firebase pone al nudulo de nuestra fruta.
-      //Al guardarse sin id nuestra fruta, ahora la actualizamos con el id que firebase nos devuelve.
-      fruit.id = key;
-      this.afDB.database.ref('fruits/'+fruit.id).set(fruit);
-     
-  }
+    
+    
 
     goBack() {
       this.nav.back();

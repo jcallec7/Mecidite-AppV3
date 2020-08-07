@@ -24,7 +24,7 @@ export class ListMdPage implements OnInit {
     private nav: NavController 
   ) { }
   ngOnInit() {
-    this.mediDetalles = this.mdService.getMediDetalles();
+    //this.mediDetalles = this.mdService.getMediDetalles();
     
   }
 
@@ -35,11 +35,11 @@ export class ListMdPage implements OnInit {
   showCrearMD(){
     this.router.navigate([`medicamento-detalle`])
   }
-
+/*
   deleteMedicamentoDetalle(medicamentoID: string) {
     this.mdService.deleteMedicamentoDetalle(medicamentoID);
   }
-
+*/
   goBack() {
     this.nav.back();
   }
