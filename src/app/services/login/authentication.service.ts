@@ -114,7 +114,7 @@ export class AuthenticationService {
         uid: user.uid,
         email: user.email || null,
         displayName: user.displayName || '',
-        photoURL: user.photoURL || "https://goo.gl/7kz9qG",
+        photoURL: user.photoURL || "https://firebasestorage.googleapis.com/v0/b/mediciteapp.appspot.com/o/adjuntos%2Fimgs%2FdefaultPhoto.png?alt=media&token=e3489ffe-f8e2-4544-bd9a-22a115355f20",
         provider: provider,
         lastLogin: new Date(Number(user.lastLoginAt)) || new Date()
       };

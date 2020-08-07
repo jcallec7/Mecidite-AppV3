@@ -20,9 +20,9 @@
           </div>
           <div class="nameplate">
 
-            <h3 [hidden] = "showDisplayName ? true : false">Paciente {{usuario.nombre}} {{usuario.apellido}}</h3>
-            <h3 [hidden] = "showDisplayName ? false : true">Dr(a). {{usuario.nombre}} {{usuario.apellido}}</h3>
-            <h3 [hidden] = "showDisplayName ? false : true">{{usuario.especialidad}}</h3>
+            <h3 [hidden] = "showItem ? true : false">Paciente {{usuario.nombre}} {{usuario.apellido}}</h3>
+            <h3 [hidden] = "showItem ? false : true">Dr(a). {{usuario.nombre}} {{usuario.apellido}}</h3>
+            <h3 [hidden] = "showItem ? false : true">{{usuario.especialidad}}</h3>
             
 
           </div>
@@ -112,7 +112,7 @@
             </ion-label>
           </ion-item>
 
-          <ion-item [hidden] = "showDisplayName ? true : false">
+          <ion-item [hidden] = "showItem ? true : false">
             <ion-avatar slot="start">
               <ion-icon name="water-outline"></ion-icon>            
             </ion-avatar>
@@ -126,6 +126,7 @@
       </div>
 
       <div class="user-profile-item others">
+        
         <div class="item__header">
           <h3>Configuración</h3>
         </div>

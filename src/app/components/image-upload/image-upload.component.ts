@@ -29,15 +29,13 @@ export class ImageUploadComponent implements OnInit {
       destinationType: this.camera.DestinationType.DATA_URL,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: false,
-      allowEdit: true,
-      targetWidth:300,
-      targetHeight:300
+      allowEdit: true
     }
 
     console.log("options", options);
     const base64 = await this.camera.getPicture(options);
-
-    this.uploadFinished.emit(base64)
+    
+    this.startUpload(base64);
 
   }
 
@@ -98,9 +96,8 @@ export class ImageUploadComponent implements OnInit {
           let downloadURL = ref.getDownloadURL()
           downloadURL.subscribe(url => {
             data.url= url;
-            console.log("donload terminado", url);
-            return data.url
-            //this.uploadFinished.emit(data);
+            console.log("download terminado", url);
+            this.uploadFinished.emit(data);
           });
         })
       )
