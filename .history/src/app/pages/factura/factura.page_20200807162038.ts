@@ -93,8 +93,7 @@ export class FacturaPage implements OnInit {
   /* CREACION PDF*/
   createPdf(datos: any, datos3: any) {
     console.log(datos);
-
-    const fecha = new Date().toISOString();
+    var fecha = new Date().toISOString(),
     var docDefinition = {
       content: [
         { text: 'MEDICITE S.A.', style: 'header' },
@@ -102,6 +101,8 @@ export class FacturaPage implements OnInit {
         { text: 'medicite@gmail.com', style: 'subheader' },
         { text: 'Telefono: 2828628', style: 'subheader' },
         { text: 'RUC: 0106432503', style: 'subheader' },
+
+
         { text: fecha  , alignment: 'right'},
 
         { text: 'Datos Cliente', style: 'header' },

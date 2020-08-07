@@ -35,9 +35,9 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     StatusBar,
     SplashScreen,
     Camera,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     File,
-    FileOpener,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }  
+    FileOpener
   ],
   bootstrap: [AppComponent]
 })

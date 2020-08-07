@@ -102,6 +102,8 @@ export class FacturaPage implements OnInit {
         { text: 'medicite@gmail.com', style: 'subheader' },
         { text: 'Telefono: 2828628', style: 'subheader' },
         { text: 'RUC: 0106432503', style: 'subheader' },
+
+
         { text: fecha  , alignment: 'right'},
 
         { text: 'Datos Cliente', style: 'header' },
