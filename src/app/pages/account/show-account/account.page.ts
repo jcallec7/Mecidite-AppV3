@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
 import { Usuario } from 'src/app/model/Usuario';
 import { AccountService } from 'src/app/services/account/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -13,9 +14,9 @@ export class AccountPage implements OnInit {
 
 
   usuario =  new Usuario()
-  showDisplayName = false
+  showItem = false
 
-  constructor( private nav: NavController, private auth: AuthenticationService, private AccountServices: AccountService) { }
+  constructor( private nav: NavController, private auth: AuthenticationService, private AccountServices: AccountService, private router: Router) { }
 
   ngOnInit() {
 
@@ -28,9 +29,9 @@ export class AccountPage implements OnInit {
         console.log(this.usuario.rol)
 
         if (this.usuario.rol=='2'){
-          this.showDisplayName = true
+          this.showItem = true
         }else{
-          this.showDisplayName = false 
+          this.showItem = false 
         }
 
         
@@ -46,6 +47,12 @@ export class AccountPage implements OnInit {
 
   goBack() {
     this.nav.back();
+  }
+
+  goToEditProfile(){
+
+    this.router.navigate(['edit-account'])
+
   }
 
 

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { EditAccountPageRoutingModule } from './edit-account-routing.module';
 
 import { EditAccountPage } from './edit-account.page';
+import { ImageUploadComponent } from 'src/app/components/image-upload/image-upload.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { EditAccountPage } from './edit-account.page';
     IonicModule,
     EditAccountPageRoutingModule
   ],
-  declarations: [EditAccountPage]
+  declarations: [EditAccountPage, ImageUploadComponent],
+  exports: [ImageUploadComponent]
 })
 export class EditAccountPageModule {}

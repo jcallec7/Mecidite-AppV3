@@ -44,7 +44,7 @@ export class RegisterService {
 
       await user.updateProfile({
         displayName: usuario.nombre + "" + usuario.apellido,
-        photoURL: user.photoURL || "https://goo.gl/7kz9qG",
+        photoURL: usuario.photoURL,
       });
 
       return this.auth.emailPasswordLogin(email,password)

@@ -1,9 +1,145 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>edit-account</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button slot="icon-only" class="back-button" color="light" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 
+  <div class="page__user-profile">
+    <app-profile-skeleton *ngIf="dataLoading; else dataLoaded"></app-profile-skeleton>
+    <ng-template #dataLoaded>
+      <div class="profile-header" [class.show-stats]="0">
+        <div class="header-fill">
+          <img src={{usuario.photoURL}} alt="">
+        </div>
+        <div class="cover">
+          <div class="avatar">
+            <img src={{usuario.photoURL}} alt="">
+          </div>
+          <div class="nameplate">
+
+            <h3 [hidden] = "showItem ? true : false">Paciente {{usuario.nombre}} {{usuario.apellido}}</h3>
+            <h3 [hidden] = "showItem ? false : true">Dr(a). {{usuario.nombre}} {{usuario.apellido}}</h3>
+            <h3 [hidden] = "showItem ? false : true">{{usuario.especialidad}}</h3>
+            
+
+          </div>
+        </div>
+        <div class="profile-stats fixed-bottom trans" [class.certified]="1">
+          <div class="experience">
+            <strong>30 Yr</strong>
+            <span>Experience</span>
+          </div>
+          <div class="ceritification">
+            <strong>Doctor Council</strong>
+            <span>Certified</span>
+          </div>
+          <div class="ratings">
+            <strong>3.5 / 5</strong>
+            <span>Ratings</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-profile-item contact">
+        
+        <div class="item__header">
+          <h3>Cambiar foto de perfil</h3>
+        </div>
+
+
+        <ion-list class="mb-0">
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-icon md="image-outline" ></ion-icon>
+            </ion-avatar>
+            <app-image-upload [icon]="'camera'" (uploadFinished)="setImage($event)"></app-image-upload>
+          </ion-item>
+        </ion-list>
+
+      </div>
+
+      <div class="user-profile-item contact">
+        <div class="item__header">
+          <h3>Editar información </h3>
+        </div>
+        <ion-list>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-icon name="person-outline"></ion-icon>
+            </ion-avatar>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="usuario.nombre"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-icon name="person-outline"></ion-icon>
+            </ion-avatar>
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input [(ngModel)]="usuario.apellido"></ion-input>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-icon name="pin-outline"></ion-icon>
+            </ion-avatar>
+            <ion-label position="floating">Dirección</ion-label>
+            <ion-input [(ngModel)]="usuario.direccion"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <ion-icon name="call-outline"></ion-icon>            
+            </ion-avatar>
+            <ion-label position="floating">Teléfono</ion-label>
+            <ion-input [(ngModel)]="usuario.telf"></ion-input>
+          </ion-item>
+
+          <ion-item [hidden] = "showItem ? true : false">
+            <ion-avatar slot="start">
+              <ion-icon name="body-outline"></ion-icon>            
+            </ion-avatar>
+            <ion-label position="floating">Estatura</ion-label>
+            <ion-input [(ngModel)]="usuario.estatura"></ion-input>
+          </ion-item>
+
+          <ion-item [hidden] = "showItem ? true : false">
+            <ion-avatar slot="start">
+              <ion-icon name="barbell-outline"></ion-icon>            
+            </ion-avatar>
+            <ion-label position="floating">Peso</ion-label>
+            <ion-input [(ngModel)]="usuario.peso"></ion-input>
+          </ion-item>
+
+
+        </ion-list>
+
+
+        <ion-item >
+          <ion-label class="message">
+            <p>Si los datos que desea actualizar no se encuentran en esta ventana, por favor enviar un correo al administrador para su actualización ya que se trata de información que necesita ser verificada.</p>
+            <br>
+            <h6 >Gracias por su comprensión.</h6>
+          </ion-label>
+        </ion-item>
+
+  
+
+        <div class="ion-padding">
+          <ion-button expand="block" shape="block" (click)="updateUser()">Actualizar</ion-button>
+        </div>
+
+      </div>
+
+      
+    </ng-template>
+  </div>
 </ion-content>
+<ion-footer class="flat">
+  <footer-tabs></footer-tabs>
+</ion-footer>
