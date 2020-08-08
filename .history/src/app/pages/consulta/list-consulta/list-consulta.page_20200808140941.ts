@@ -136,7 +136,7 @@ export class ListConsultaPage implements OnInit {
     this.diagnosticoService.getDiagnostico(diagnosticoUID).then(Data => {
       console.log(Data);
       
-      /*this.diagnostico = Data;
+      //this.diagnostico = Data;
       console.log(this.diagnostico);
 
     });
