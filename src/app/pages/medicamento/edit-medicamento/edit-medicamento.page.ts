@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MedicamentoServiceService } from 'src/app/services/medicamento-service/medicamento-service.service';
 import { Medicamento } from 'src/app/model/Medicamento';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-medicamento',
@@ -14,19 +14,20 @@ export class EditMedicamentoPage implements OnInit {
   constructor(
     private ms: MedicamentoServiceService,
     private alert: AlertController,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   medicamento = new Medicamento();
+  
   showItem = false;
 
   ngOnInit() {
-    this.ms.getMedicamento(this.medicamento.uid);
-      console.log(this.medicamento.uid)
-      this.showItem = true;
+    this.route.queryParams.subscribe(data=>{
+      this.medicamento= this.router.getCurrentNavigation().extras.state.medicamento;
+    })
   }
 
   updateMedicamento() {
-    this.router.navigate(["edit-medicamento"])
     const message = this.ms.updateMedicamento(this.medicamento);
 
     message.then(async msg => {

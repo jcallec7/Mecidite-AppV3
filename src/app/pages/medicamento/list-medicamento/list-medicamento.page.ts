@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Medicamento } from 'src/app/model/Medicamento';
 import {MedicamentoServiceService} from 'src/app/services/medicamento-service/medicamento-service.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { NavController } from '@ionic/angular';
 
@@ -18,9 +18,10 @@ export class ListMedicamentoPage implements OnInit {
     private nav: NavController
   ) { }
 
-  medicamento:Medicamento;
+  medicamento:  Observable<any[]>
   medicamentos: Observable<any[]>
   medicamentos2: any[];
+  
 
 
   ngOnInit() {
@@ -40,8 +41,18 @@ export class ListMedicamentoPage implements OnInit {
     this.router.navigate([`create-medicamento`])
   }
 
-  showEditMedicamento(){
-    this.router.navigate([`edit-medicamento`])
+  showEditMedicamento(medicamentoID: string){
+    this.medicamento = this.ms.getMedicamento(medicamentoID);
+    this.medicamento.subscribe(data=>{
+      let extras: NavigationExtras = {
+        state:{
+          medicamento:data
+        }
+      }
+      this.router.navigate([`edit-medicamento`], extras)
+    })
+    
+    
   }
   
 
