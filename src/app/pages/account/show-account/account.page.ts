@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
 import { Usuario } from 'src/app/model/Usuario';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -16,7 +16,7 @@ export class AccountPage implements OnInit {
   usuario =  new Usuario()
   showItem = false
 
-  constructor( private nav: NavController, private auth: AuthenticationService, private AccountServices: AccountService, private router: Router) { }
+  constructor( private nav: NavController, private auth: AuthenticationService, private AccountServices: AccountService, private router: Router, private alert: AlertController) { }
 
   ngOnInit() {
 
@@ -53,6 +53,33 @@ export class AccountPage implements OnInit {
 
     this.router.navigate(['edit-account'])
 
+  }
+
+
+  async logout() {
+    const alert = await this.alert.create({
+      header: 'Confirmar',
+      message: 'Realmente quiere cerrar sesión?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'Yes',
+          handler: () => {
+            this.doLogout();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  doLogout() {
+
+    this.auth.logout()
+    this.nav.navigateRoot(['/welcome']);
   }
 
 
