@@ -23,7 +23,7 @@
                   <p> {{medicamento.concentracion}}</p>
                   <div class="item-note" item-end>
           
-                    <ion-button (click)="showEditMedicamento()">Editar</ion-button>
+                    <ion-button (click)="showEditMedicamento(medicamento.uid)">Editar</ion-button>
                     <ion-button (click)="deleteMedicamento(medicamento.uid)" color="danger">Borrar</ion-button>
                   </div>
                 </ion-label>

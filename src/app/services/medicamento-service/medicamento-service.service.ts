@@ -13,7 +13,7 @@ export class MedicamentoServiceService {
 
   constructor(private afs: AngularFirestore) { }
 
-  //CREATE
+
   saveMedicamento(medicamento:Medicamento){
     const refMedicamento = this.afs.collection("medicamento");
     medicamento.uid = this.afs.createId()
@@ -22,9 +22,7 @@ export class MedicamentoServiceService {
   }
 
 
-  getMedicamentos(): Observable<any[]>{
-    return this.afs.collection('medicamento').valueChanges();
-  }
+  
 
   async updateMedicamento(medicamento: Medicamento){
 

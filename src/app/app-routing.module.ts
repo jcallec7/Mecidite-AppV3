@@ -110,6 +110,10 @@ const routes: Routes = [
     path: 'edit-medicamento',
     loadChildren: () => import('./pages/medicamento/edit-medicamento/edit-medicamento.module').then( m => m.EditMedicamentoPageModule)
   },
+  {
+    path: 'edit-md',
+    loadChildren: () => import('./pages/medicamento-detalle/edit-md/edit-md.module').then( m => m.EditMdPageModule)
+  },
 
 
 
