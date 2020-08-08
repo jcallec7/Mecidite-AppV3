@@ -40,6 +40,11 @@ export class ListMedicamentoPage implements OnInit {
     this.router.navigate([`create-medicamento`])
   }
 
+  showEditMedicamento(){
+    this.router.navigate([`edit-medicamento`])
+  }
+  
+
   deleteMedicamento(medicamentoID: string) {
     this.ms.deleteMedicamento(medicamentoID);
   }

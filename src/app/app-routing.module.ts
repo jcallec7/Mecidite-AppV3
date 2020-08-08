@@ -102,7 +102,11 @@ const routes: Routes = [
   {
     path: 'contactanos',
     loadChildren: () => import('./pages/contactanos/contactanos.module').then( m => m.ContactanosPageModule)
+  },  {
+    path: 'edit-medicamento',
+    loadChildren: () => import('./pages/medicamento/edit-medicamento/edit-medicamento.module').then( m => m.EditMedicamentoPageModule)
   },
+
 
 
 

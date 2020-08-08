@@ -26,20 +26,24 @@ export class MedicamentoServiceService {
     return this.afs.collection('medicamento').valueChanges();
   }
 
-  updateMedicamento(docID: string, dataObj: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-        this.afs
-            .collection('medicamento')
-            .doc(docID)
-            .update(dataObj)
-            .then((obj: any) => {
-                resolve(obj);
-            })
-            .catch((error: any) => {
-                reject(error);
-            });
-    });
+  async updateMedicamento(medicamento: Medicamento){
+
+    try{
+
+      const refMedicamento =  this.afs.collection("medicamento")
+      const param = JSON.parse(JSON.stringify(medicamento));
+      refMedicamento.doc(medicamento.uid).set(param)
+
+      return true
+
+    }catch(error){
+
+      return false
+
+    }
+    
   }
+
 
   deleteMedicamento(docID: string): Promise<any> {
     return new Promise((resolve, reject) => {
