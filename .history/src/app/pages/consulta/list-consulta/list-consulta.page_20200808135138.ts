@@ -23,7 +23,7 @@ export class ListConsultaPage implements OnInit {
   private consultas: Observable<Consulta[]>;
   private usuario: Usuario = new Usuario();
   private consultasVisibles: Consulta[];
-  private diagnostico: Diagnostico;
+  private diagnostico: Diagnostico = new Diagnostico();
 
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
@@ -113,7 +113,7 @@ export class ListConsultaPage implements OnInit {
   }
 
   editConsulta(uid: string) {
-    this.router.navigate([`edit-consulta/${uid}`]);
+    this.router.navigate([`editar-empleo/${uid}`]);
     /*NOTIFICACION */
     this.localNotifications.schedule({
     id: 5,
@@ -133,13 +133,7 @@ export class ListConsultaPage implements OnInit {
 
   async showDiagnostico(diagnosticoUID: string)
   {
-    this.diagnosticoService.getDiagnostico(diagnosticoUID).then(data => {
-      
-      this.diagnostico = data;
 
-      console.log(this.diagnostico);
-
-    });
   }
 
   realizarPago(consulta: Consulta) {
@@ -164,10 +158,6 @@ export class ListConsultaPage implements OnInit {
 
     });
 
-  }
-
-  addDiagnostico(consulta: Consulta) {
-    this.router.navigate([`create-diagnostico/${consulta.uid}`]);
   }
 
   goBack() {

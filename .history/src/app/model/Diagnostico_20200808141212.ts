@@ -1,3 +1,4 @@
+
 export class Diagnostico {
 
     uid: string;

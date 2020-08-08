@@ -40,9 +40,6 @@
             <ion-button shape="round" (click)="realizarPago(consulta)" *ngIf="consulta.estado == 'Creada, pendiente de pago' && usuario.rol == '3'">
                 Realizar el pago
             </ion-button>
-            <ion-button shape="round" (click)="addDiagnostico(consulta)" *ngIf="consulta.estado == 'Pagada, pendiente de atencion' && usuario.rol == '2'">
-              Atender
-            </ion-button>
         </ion-item>
 
     </ion-list>
