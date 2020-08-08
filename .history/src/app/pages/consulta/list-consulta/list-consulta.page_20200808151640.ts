@@ -6,7 +6,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
 import { UsuarioService } from 'src/app/services/usuario-service/usuario.service';
 import { Usuario } from 'src/app/model/Usuario';
-import { NavController, Platform } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -14,12 +14,6 @@ import { Diagnostico } from 'src/app/model/Diagnostico';
 import { DiagnosticoServiceService } from 'src/app/services/diagnostico-service/diagnostico-service.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { Medicamento } from '../../../model/Medicamento';
-import { MedicamentoServiceService } from '../../../services/medicamento-service/medicamento-service.service';
-import { MedicamentoDetalle } from '../../../model/MedicamentoDetalle';
-import { MdServiceService } from '../../../services/md-service/md-service.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -34,11 +28,6 @@ export class ListConsultaPage implements OnInit {
   private consultasVisibles: Consulta[];
   private diagnostico: Diagnostico;
   pdfObj = null;
-  private medicamento: string;
-  private medicamentoNombres: Medicamento [];
-
-
-  
 
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
@@ -47,12 +36,7 @@ export class ListConsultaPage implements OnInit {
               private nav: NavController,
               private callNumber: CallNumber,
               private localNotifications: LocalNotifications,
-              private diagnosticoService: DiagnosticoServiceService,
-              private file: File,
-              private fileOpener: FileOpener,
-              private plt: Platform,
-              private medicamentoService: MedicamentoServiceService,
-              private md: MdServiceService) { }
+              private diagnosticoService: DiagnosticoServiceService) { }
 
   ngOnInit() {
 
@@ -129,9 +113,6 @@ export class ListConsultaPage implements OnInit {
     });
 
     
-    
-
-    
 
   }
 
@@ -156,23 +137,10 @@ export class ListConsultaPage implements OnInit {
 
   async showDiagnostico(diagnosticoUID: string)
   {
-    
     this.diagnosticoService.getDiagnostico(diagnosticoUID).then(data => {
-
-     
-
-      data.medicamento.forEach( async data2=>{
-        let m: Medicamento;
-        let md: MedicamentoDetalle;
-        
-        //md = await this.md.getMedicamcentoById(data2);
-        console.log(data2)
-        //data.medicamento = [m.concentracion+' ' +m.nombre+' '+m.uid];
-        
-      })
+      
       this.diagnostico = data;
       console.log(this.diagnostico);
-
       const fecha = new Date().toISOString();
 
       var docDefinition = {
@@ -203,7 +171,7 @@ export class ListConsultaPage implements OnInit {
           { text: 'Descripcion:', style: 'subheader' },
           { text: data.descripcion},
           { text: 'Medicamentos:', style: 'subheader' },
-          { text: this.diagnostico.medicamento},
+          { text: data.medicamento},
 
         ],
         styles: {
@@ -229,8 +197,8 @@ export class ListConsultaPage implements OnInit {
         this.pdfObj.getBuffer((buffer) => {
           var blob = new Blob([buffer], { type: 'application/pdf' });
   
-          this.file.writeFile(this.file.dataDirectory, 'diagnostico.pdf', blob, { replace: true }).then(fileEntry => {
-            this.fileOpener.open(this.file.dataDirectory + 'diagnostico.pdf', 'application/pdf');
+          this.file.writeFile(this.file.dataDirectory, 'myletter.pdf', blob, { replace: true }).then(fileEntry => {
+            this.fileOpener.open(this.file.dataDirectory + 'myletter.pdf', 'application/pdf');
           });
         });
       } else {

@@ -18,8 +18,6 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Medicamento } from '../../../model/Medicamento';
 import { MedicamentoServiceService } from '../../../services/medicamento-service/medicamento-service.service';
-import { MedicamentoDetalle } from '../../../model/MedicamentoDetalle';
-import { MdServiceService } from '../../../services/md-service/md-service.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -51,8 +49,7 @@ export class ListConsultaPage implements OnInit {
               private file: File,
               private fileOpener: FileOpener,
               private plt: Platform,
-              private medicamentoService: MedicamentoServiceService,
-              private md: MdServiceService) { }
+              private medicamentoService: MedicamentoServiceService) { }
 
   ngOnInit() {
 
@@ -158,17 +155,13 @@ export class ListConsultaPage implements OnInit {
   {
     
     this.diagnosticoService.getDiagnostico(diagnosticoUID).then(data => {
-
      
-
       data.medicamento.forEach( async data2=>{
-        let m: Medicamento;
-        let md: MedicamentoDetalle;
-        
-        //md = await this.md.getMedicamcentoById(data2);
-        console.log(data2)
-        //data.medicamento = [m.concentracion+' ' +m.nombre+' '+m.uid];
-        
+        let m: Observable<Medicamento> ;
+        m = await this.medicamentoService.getMedicamento(data2);
+        m.subscribe(data3=>{
+          data.medicamento = [data3.concentracion+' '+data3.nombre+' '+data3.uid];
+        })
       })
       this.diagnostico = data;
       console.log(this.diagnostico);

@@ -165,7 +165,7 @@ export class ListConsultaPage implements OnInit {
         let m: Medicamento;
         let md: MedicamentoDetalle;
         
-        //md = await this.md.getMedicamcentoById(data2);
+        md = await this.md.getMedicamcentoById(data2);
         console.log(data2)
         //data.medicamento = [m.concentracion+' ' +m.nombre+' '+m.uid];
         

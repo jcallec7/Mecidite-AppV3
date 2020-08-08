@@ -66,12 +66,8 @@ export class MedicamentoServiceService {
         orderBy('fecha', 'asc')).valueChanges();
   }
 
-  getMedicamento(uid: string): Observable<any>{
-    let itemDoc = this.afs.doc<any>(`medicamento/${uid}`);
-    console.log(itemDoc);
-    return itemDoc.valueChanges();
-  }
-  async getMedicamentoByUID(uid: string): Promise<Medicamento> {
+
+  async getMedicamento(uid: string): Promise<Medicamento> {
     try{
         let aux:any = await this.afs.collection("medicamentos", 
             ref => ref.where('uid', '==', uid))
@@ -88,7 +84,5 @@ export class MedicamentoServiceService {
       throw error;
     } ;
   }
-
-
   
 }
