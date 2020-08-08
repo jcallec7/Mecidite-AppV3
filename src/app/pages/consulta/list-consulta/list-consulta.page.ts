@@ -85,6 +85,15 @@ export class ListConsultaPage implements OnInit {
 
   }
 
+  editConsulta(uid: string) {
+    this.router.navigate([`editar-empleo/${uid}`]);
+  }
+
+  async llamarmedico(uid: string) {
+    let med: Usuario = await this.consultaService.getUsuarioById(uid)
+    //med.telf //Aqui esta el telefono hazte loco
+  }
+
   goBack() {
     this.nav.back();
   }
