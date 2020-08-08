@@ -31,14 +31,12 @@
             <ion-button shape="round" (click)="editConsulta(consulta.uid)" *ngIf="consulta.estado == 'Pagada, pendiente de atencion' && usuario.rol == '2'">
                 Editar
             </ion-button>
-            <ion-button shape="round" (click)="showDiagnostico(consulta.uid)" *ngIf="consulta.estado == 'Finalizada'">
+            <ion-button shape="round" (click)="showDiagnostico(empleo.uid)" *ngIf="consulta.estado == 'Finalizada'">
                 Diagnostico
             </ion-button>
-            <ion-button shape="round" (click)="llamarmedico(consulta.medicoUID)" *ngIf="consulta.estado == 'Pagada, pendiente de atencion' && usuario.rol == '3'">
+
+            <ion-button shape="round" (click)="llamarMedico(consulta.medicoUID)" *ngIf="consulta.estado == 'Pagada, pendiente de atencion' && usuario.rol == '3'">
                 Llamar medico
-            </ion-button>
-            <ion-button shape="round" (click)="realizarPago(consulta)" *ngIf="consulta.estado == 'Creada, pendiente de pago' && usuario.rol == '3'">
-                Realizar el pago
             </ion-button>
         </ion-item>
 

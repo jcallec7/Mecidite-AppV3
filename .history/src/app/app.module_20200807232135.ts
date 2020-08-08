@@ -18,7 +18,6 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 
 
 @NgModule({
@@ -40,7 +39,6 @@ import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native
     File,
     FileOpener,
     CallNumber,
-    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

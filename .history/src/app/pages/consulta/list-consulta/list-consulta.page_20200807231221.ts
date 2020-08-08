@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Consulta } from 'src/app/model/Consulta';
 import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
-import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
 import { UsuarioService } from 'src/app/services/usuario-service/usuario.service';
 import { Usuario } from 'src/app/model/Usuario';
 import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-list-consulta',
@@ -27,8 +26,7 @@ export class ListConsultaPage implements OnInit {
               public router: Router, 
               public auth: AuthenticationService,
               private nav: NavController,
-              private callNumber: CallNumber,
-              private localNotifications: LocalNotifications) { }
+              private callNumber: CallNumber) { }
 
   ngOnInit() {
 
@@ -91,14 +89,6 @@ export class ListConsultaPage implements OnInit {
 
   editConsulta(uid: string) {
     this.router.navigate([`editar-empleo/${uid}`]);
-    /*NOTIFICACION */
-    this.localNotifications.schedule({
-    id: 5,
-    title: 'Consulta Guardada',
-    text: 'El pago esta confirmado',
-    data: { mydata: 'GUARDADO'},
-    trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
-  });
   }
 
   async llamarmedico(uid: string) {
@@ -109,29 +99,7 @@ export class ListConsultaPage implements OnInit {
   }
 
   async showDiagnostico()
-  {}
-
-  realizarPago(consulta: Consulta) {
-
-    // cargar datos de la sesion:
-    
-    this.auth.getCurrentUser().then(user => {
-      console.log(user);
-      if(user){
-
-        //console.log("Consulta Usuario uid: " + this.consulta.pacienteUID)
-        let navigationExtras: NavigationExtras = {
-          state: {
-              consulta: consulta
-          }
-        };  
-        this.router.navigate(["/factura"], navigationExtras);
-      }else{
-        console.log("Usuario no rescatado")
-        this.router.navigate(['welcome'])
-      }
-
-    });
+  {
 
   }
 

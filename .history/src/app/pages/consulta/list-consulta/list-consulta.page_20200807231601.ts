@@ -9,7 +9,6 @@ import { Usuario } from 'src/app/model/Usuario';
 import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-list-consulta',
@@ -27,8 +26,7 @@ export class ListConsultaPage implements OnInit {
               public router: Router, 
               public auth: AuthenticationService,
               private nav: NavController,
-              private callNumber: CallNumber,
-              private localNotifications: LocalNotifications) { }
+              private callNumber: CallNumber) { }
 
   ngOnInit() {
 
@@ -91,14 +89,6 @@ export class ListConsultaPage implements OnInit {
 
   editConsulta(uid: string) {
     this.router.navigate([`editar-empleo/${uid}`]);
-    /*NOTIFICACION */
-    this.localNotifications.schedule({
-    id: 5,
-    title: 'Consulta Guardada',
-    text: 'El pago esta confirmado',
-    data: { mydata: 'GUARDADO'},
-    trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
-  });
   }
 
   async llamarmedico(uid: string) {
@@ -107,9 +97,6 @@ export class ListConsultaPage implements OnInit {
     this.callNumber.callNumber(med.telf, true);
     //med.telf //Aqui esta el telefono hazte loco
   }
-
-  async showDiagnostico()
-  {}
 
   realizarPago(consulta: Consulta) {
 

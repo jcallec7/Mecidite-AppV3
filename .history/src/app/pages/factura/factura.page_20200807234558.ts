@@ -14,7 +14,6 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Platform } from '@ionic/angular';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -193,15 +192,6 @@ export class FacturaPage implements OnInit {
       this.pdfObj.download();
     }
   }
-
-  /*NOTIFICACION */
-  this.localNotifications.schedule({
-    id: 3,
-    title: 'Consulta Guardada',
-    text: 'El pago esta confirmado',
-    data: { mydata: 'GUARDADO'},
-    trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
-  });
 
 
 

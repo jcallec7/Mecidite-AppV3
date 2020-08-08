@@ -5,8 +5,7 @@ import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/model/Usuario';
 import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
-import { NavController, Platform } from '@ionic/angular';
-import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-consulta',
@@ -30,13 +29,11 @@ export class CreateConsultaPage implements OnInit {
   medicos: Observable<Usuario[]>;
   medicoSelected: Usuario;
 
-  constructor(private consultaService: ConsultaService,
-              private route: ActivatedRoute,
-              public router: Router,
+  constructor(private consultaService: ConsultaService, 
+              private route: ActivatedRoute, 
+              public router: Router, 
               public auth: AuthenticationService,
-              private nav: NavController,
-              private plt: Platform,
-              private localNotifications: LocalNotifications) { }
+              private nav: NavController) { }
 
   ngOnInit() {
 
@@ -78,14 +75,6 @@ export class CreateConsultaPage implements OnInit {
         this.router.navigate(['welcome'])
       }
 
-      /*NOTIFICACION */
-      this.localNotifications.schedule({
-        id: 1,
-        title: 'Consulta Creada',
-        text: 'El pago esta pendiente',
-        data: { mydata: 'Confirme su pago'},
-        trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
-      });
     });
 
     

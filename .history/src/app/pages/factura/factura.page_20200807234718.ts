@@ -196,7 +196,7 @@ export class FacturaPage implements OnInit {
 
   /*NOTIFICACION */
   this.localNotifications.schedule({
-    id: 3,
+    id: 1,
     title: 'Consulta Guardada',
     text: 'El pago esta confirmado',
     data: { mydata: 'GUARDADO'},

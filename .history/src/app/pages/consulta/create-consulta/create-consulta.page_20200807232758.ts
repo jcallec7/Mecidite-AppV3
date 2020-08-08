@@ -86,6 +86,9 @@ export class CreateConsultaPage implements OnInit {
         data: { mydata: 'Confirme su pago'},
         trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
       });
+
+
+
     });
 
     

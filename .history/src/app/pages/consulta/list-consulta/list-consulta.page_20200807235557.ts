@@ -92,8 +92,8 @@ export class ListConsultaPage implements OnInit {
   editConsulta(uid: string) {
     this.router.navigate([`editar-empleo/${uid}`]);
     /*NOTIFICACION */
-    this.localNotifications.schedule({
-    id: 5,
+  this.localNotifications.schedule({
+    id: 3,
     title: 'Consulta Guardada',
     text: 'El pago esta confirmado',
     data: { mydata: 'GUARDADO'},
