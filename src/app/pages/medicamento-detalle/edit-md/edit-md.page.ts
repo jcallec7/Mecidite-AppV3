@@ -25,6 +25,7 @@ export class EditMdPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(data=>{
       this.md= this.router.getCurrentNavigation().extras.state.md;
+      console.log(this.md);
     })
   }
 
