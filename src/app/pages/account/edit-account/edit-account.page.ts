@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Usuario } from 'src/app/model/Usuario';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-account',
@@ -11,7 +12,7 @@ import { NavController } from '@ionic/angular';
 })
 export class EditAccountPage implements OnInit {
 
-  constructor(private AccountServices: AccountService, private auth: AuthenticationService, private nav: NavController) { }
+  constructor(private AccountServices: AccountService, private auth: AuthenticationService, private nav: NavController, private alert: AlertController, private router: Router) { }
 
   usuario =  new Usuario()
   showItem = false
@@ -24,7 +25,7 @@ export class EditAccountPage implements OnInit {
         
         this.usuario = data
 
-        console.log(this.usuario.rol)
+        console.log(this.usuario.uid)
 
         if (this.usuario.rol=='2'){
           this.showItem = true
@@ -48,7 +49,49 @@ export class EditAccountPage implements OnInit {
 
   updateUser(){
 
-    this.AccountServices.updateUsuario(this.usuario)
+    
+
+    const message = this.AccountServices.updateUsuario(this.usuario)
+
+    message.then(async msg => {
+
+      if(msg == false){
+
+        const alert = await this.alert.create({
+          header: 'Lo sentimos!',
+          message: 'Algo sucedio, no se pudo actualizar sus datos, contactese con los proveedores.',
+          buttons: [
+            {
+              text: 'OK'
+            }
+          ],
+        });
+  
+        await alert.present()
+  
+      }else{
+
+        const alert = await this.alert.create({
+          header: 'Listo!',
+          message: 'Actualización completa.',
+          buttons: [
+            {
+              text: 'OK'
+            }
+          ],
+        });
+  
+        await alert.present()
+  
+        this.router.navigate(["show-account"])
+        console.log('Edicion exitosa')
+  
+        
+  
+      }
+
+
+    })
 
   }
 

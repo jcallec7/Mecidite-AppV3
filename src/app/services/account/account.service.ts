@@ -17,18 +17,30 @@ export class AccountService {
   }
 
   async updateUsuario(usuario: Usuario){
-    const refUser =  this.afs.collection("usuarios")
-    const param = JSON.parse(JSON.stringify(usuario));
-    refUser.doc(usuario.uid).update(param)
+
+    try{
+
+      const refUser =  this.afs.collection("usuarios")
+      const param = JSON.parse(JSON.stringify(usuario));
+      refUser.doc(usuario.uid).set(param)
 
 
-    const user = await this.afAuth.currentUser;
+      const user = await this.afAuth.currentUser;
 
-    await user.updateProfile({
-      displayName: usuario.nombre + "" + usuario.apellido,
-      photoURL: usuario.photoURL,      
-      
-    });
+      await user.updateProfile({
+        displayName: usuario.nombre + "" + usuario.apellido,
+        photoURL: usuario.photoURL,      
+        
+      });
+
+      return true
+
+    }catch(error){
+
+      return false
+
+    }
+    
   }
 
 

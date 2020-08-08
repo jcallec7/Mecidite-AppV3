@@ -98,9 +98,6 @@ export class ListConsultaPage implements OnInit {
     //med.telf //Aqui esta el telefono hazte loco
   }
 
-  async showDiagnostico()
-  {}
-
   realizarPago(consulta: Consulta) {
 
     // cargar datos de la sesion:
