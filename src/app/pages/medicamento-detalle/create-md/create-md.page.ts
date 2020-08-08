@@ -3,7 +3,7 @@ import { MdServiceService } from 'src/app/services/md-service/md-service.service
 import { Observable } from 'rxjs';
 import { Medicamento } from 'src/app/model/Medicamento';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -13,32 +13,47 @@ import { NavController } from '@ionic/angular';
 })
 export class CreateMdPage implements OnInit {
 
-  md: MedicamentoDetalle = new MedicamentoDetalle();
-  
+  md: MedicamentoDetalle = {
+    uid: "",
+    medicamentoUID: "",
+    dosis: ""
+  }
+
   medicamentos: Observable<Medicamento[]>;
   medicamentoSelected: Medicamento;
-  
-  constructor(
-    private mdService: MdServiceService,
+
+  constructor(private mdService: MdServiceService,
     private route: ActivatedRoute,
     public router: Router,
     private nav: NavController) { }
 
-    ngOnInit() {
-      this.medicamentos = this.mdService.getMedicamentos();
-    }
-  
-    onChange() {
-      console.log("Selected: " + this.medicamentoSelected + " uid: " + this.medicamentoSelected.uid);
-    }
-  
-    
-    
+  ngOnInit() {
+    console.log("Aqui se listan los medicamentos");
+    this.medicamentos = this.mdService.getMedicamentos();
+  }
 
-    goBack() {
-      this.nav.back();
-    }
-  
-  
-  
+  onChange() {
+    console.log("Selected: " + this.medicamentoSelected + " uid: " + this.medicamentoSelected.uid);
+  }
+
+  async createMD() {
+    console.log("obteniendo datos del medicamento ");
+    
+    this.md.medicamentoUID = this.medicamentoSelected.uid;
+    let navigationExtras: NavigationExtras = {
+      state: {
+        md: this.md
+      }
+    };
+    console.log("hasta aqui" +this.md);
+    this.mdService.addMedicamento(this.md);
+    this.router.navigate(["/list-md"], navigationExtras);
+    
+  }
+
+
+  goBack() {
+    this.nav.back();
+  }
+
 }
