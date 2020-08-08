@@ -44,10 +44,12 @@ export class CreateConsultaPage implements OnInit {
 
     this.medicos = this.consultaService.getMedicos();
 
-		//console.log("consulta inicializada: " + JSON.stringify(this.consulta))
     
     const d = new Date();
-    d.setDate(d.getDate() + 60);
+    d.setHours(d.getHours() - d.getTimezoneOffset() / 60);
+    this.consulta.fecha = d.toISOString();
+    
+    d.setDate(d.getDate() + 60);  
     this.fechamax = d.toISOString(); 
 
 

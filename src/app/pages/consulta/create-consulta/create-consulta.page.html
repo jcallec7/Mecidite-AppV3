@@ -40,7 +40,7 @@
 
     <ion-item>
       <ion-label>Fecha & Hora</ion-label>
-      <ion-datetime [(ngModel)]="consulta.fecha" displayFormat="D MMM YYYY H:mm" [max]="fechamax"></ion-datetime>
+      <ion-datetime [(ngModel)]="consulta.fecha" displayFormat="D MMM YYYY H" [max]="fechamax" [min]="consulta.fecha" ></ion-datetime>
     </ion-item>
   
   </ion-list>
