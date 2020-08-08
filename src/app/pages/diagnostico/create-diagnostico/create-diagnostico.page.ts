@@ -53,6 +53,7 @@ export class CreateDiagnosticoPage implements OnInit {
     //console.log("Este es el uid rescatado del createDiagnostico: " + this.diagnostico.uid)
     
     this.consulta.diagnosticoUID = this.diagnostico.uid;
+    this.consulta.estado = "Finalizada"
 
     this.consultaService.updateConsulta2(this.consulta)
 
