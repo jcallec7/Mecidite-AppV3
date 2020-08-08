@@ -13,39 +13,8 @@ import { AuthenticationService } from './services/login/authentication.service';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
-  public appPages = [
-    {
-      title: 'Inicio',
-      url: 'home',
-      icon: 'home'
-    },
-    {
-      title: 'Perfil',
-      url: 'show-account',
-      icon: 'person'
-    },   
-    {
- 
-      title: 'Configuración',
-      url: '/folder/Favorites',
-      icon: 'settings'
-    },
-    {
-      title: 'Contáctanos',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Nueva Consulta',
-      url: '/create-consulta',
-      icon: 'add'
-    },
-    {
-      title: 'Mis Consultas',
-      url: '/list-consulta',
-      icon: 'list'
-    },
-  ];
+  
+  public appPages = [];
 
   constructor(
     private platform: Platform,
@@ -67,12 +36,69 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.statusBar.styleLightContent();
       this.statusBar.backgroundColorByHexString('#3F51B5');
+
       this.auth.getCurrentUser().then(user=>{
-        console.log(user)
+        console.log("UID CURRENT SESSION", user)
         if(user){
-         // this.router.navigate(['home'])
+
+          this.appPages = [
+            {
+              title: 'Iniciar Sesión',
+              url: 'login',
+              icon: 'home'
+            },
+            {
+              title: 'Recuperar Contraseña',
+              url: 'reset-password',
+              icon: 'person'
+            },   
+            {
+         
+              title: 'Registrarse',
+              url: 'type-of-register',
+              icon: 'settings'
+            }
+          ]
+          
+          this.router.navigate(['home'])
+          
         }else{
-         //this.router.navigate(['welcome'])
+
+          this.appPages = [
+            {
+              title: 'Inicio',
+              url: 'home',
+              icon: 'home'
+            },
+            {
+              title: 'Perfil',
+              url: 'show-account',
+              icon: 'person'
+            },   
+            {
+         
+              title: 'Configuración',
+              url: '/folder/Favorites',
+              icon: 'settings'
+            },
+            {
+              title: 'Contáctanos',
+              url: '/folder/Archived',
+              icon: 'archive'
+            },
+            {
+              title: 'Nueva Consulta',
+              url: '/create-consulta',
+              icon: 'add'
+            },
+            {
+              title: 'Mis Consultas',
+              url: '/list-consulta',
+              icon: 'list'
+            },
+          ]
+          
+         this.router.navigate(['welcome'])
         }
 
       }
