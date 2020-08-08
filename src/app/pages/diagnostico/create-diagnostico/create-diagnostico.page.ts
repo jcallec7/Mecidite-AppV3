@@ -17,7 +17,7 @@ export class CreateDiagnosticoPage implements OnInit {
 
   diagnostico: Diagnostico = new Diagnostico();
   prescripciones: Observable<MedicamentoDetalle[]>;
-  prescripcionSelected: MedicamentoDetalle;
+  prescripcionSelected: [];
   
   constructor( 
     private diagnosticoService:DiagnosticoServiceService, 
@@ -34,7 +34,7 @@ export class CreateDiagnosticoPage implements OnInit {
   }
 
   async createDiagnostico(){
-   this.diagnosticoService.createDiagnostico(this.diagnostico, this.prescripcionSelected.uid);
+   this.diagnosticoService.createDiagnostico(this.diagnostico, this.prescripcionSelected);
     //this.diagnosticoService.addDiagnostico(this.diagnostico);
     
   };

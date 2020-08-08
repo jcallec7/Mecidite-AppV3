@@ -52,8 +52,6 @@ export class CreateMdPage implements OnInit {
   }
 
 
-  goBack() {
-    this.nav.back();
-  }
+  
 
 }

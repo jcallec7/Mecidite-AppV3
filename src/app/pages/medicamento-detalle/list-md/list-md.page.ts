@@ -4,7 +4,6 @@ import { MdServiceService } from 'src/app/services/md-service/md-service.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
 import { NavController } from '@ionic/angular';
-import { Medicamento } from 'src/app/model/Medicamento';
 
 
 @Component({
@@ -15,7 +14,7 @@ import { Medicamento } from 'src/app/model/Medicamento';
 export class ListMdPage implements OnInit {
 
   private mediDetalles: Observable<any[]>
-  private medicamento: Medicamento = new Medicamento();
+  private md: MedicamentoDetalle = new MedicamentoDetalle;
 
   constructor(private mdService: MdServiceService,
     private route: ActivatedRoute,
@@ -23,16 +22,9 @@ export class ListMdPage implements OnInit {
     private router: Router ) { }
   
   ngOnInit() {
+    this.mediDetalles = this.mdService.getMedicamentos();
     
-    this.mediDetalles =  this.mdService.getMeDetalles();
-    let uid= Medicamento['uid'];
-    //this.mediDetalles =  this.mdService.getConsultasByMedicamentoUID(uid);
-
-
-  }
-
-  deleteMedicamento(medicamentoID: string) {
-    this.mdService.deleteMedicamento(medicamentoID);
+     
   }
 
   trackByFn(index,obj){
@@ -40,10 +32,13 @@ export class ListMdPage implements OnInit {
   }
 
   showCrearMD(){
-    this.router.navigate([`create-md`])
+    this.router.navigate([`medicamento-detalle`])
   }
-
-  
+/*
+  deleteMedicamentoDetalle(medicamentoID: string) {
+    this.mdService.deleteMedicamentoDetalle(medicamentoID);
+  }
+*/
   goBack() {
     this.nav.back();
   }
