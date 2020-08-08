@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
             },
             {
               title: 'Contáctanos',
-              url: '/folder/Archived',
+              url: 'contactanos',
               icon: 'archive'
             },
             {
@@ -98,7 +98,7 @@ export class AppComponent implements OnInit {
             },
           ]
           
-         this.router.navigate(['welcome'])
+         //this.router.navigate(['welcome'])
         }
 
       }

@@ -1,11 +1,57 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>edit-consulta</ion-title>
+    <ion-title>Editar Consulta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-list>
+
+    <ion-list-header>
+      <ion-label>
+        Solamente puede posponer la consulta; o cancelarla
+      </ion-label>
+    </ion-list-header>
   
+    <ion-item>
+      <ion-label>Área & Médico</ion-label>      
+          <h3>{{medico.especialidad}}, Dr(a). </h3>
+          <p>{{medico.nombre}} </p>
+          <p>{{medico.apellido}}</p>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Paciente</ion-label>      
+          <h3>{{paciente.nombre}} </h3>
+          <p>{{paciente.apellido}}, </p>
+          <p>{{paciente.cedula}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Estado</ion-label>      
+          <h3>{{consulta.estado}} </h3>
+    </ion-item>
+
+    <ion-list-header>
+      <ion-label>
+        Seleccione la fecha y hora para reasignar su consulta
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Fecha & Hora</ion-label>
+      <ion-datetime [(ngModel)]="consulta.fecha" displayFormat="D MMM YYYY H:mm" [max]="fechamax"></ion-datetime>
+    </ion-item>
+  
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" shape="block" (click)="cancelarConsulta()" >Cancelar Consulta</ion-button>
+  </div>
+
+  <div class="ion-padding">
+    <ion-button expand="block" shape="block" (click)="guardarCambios()" type="submit" >Guardar Cambios</ion-button>
+  </div>
 
 </ion-content>

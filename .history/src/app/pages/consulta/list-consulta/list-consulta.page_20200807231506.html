@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar class="color">
+        <ion-title class="title">Mis Consultas</ion-title>
+        <ion-buttons slot="start">
+            <ion-button slot="icon-only" class="back-button" color="light" (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+    <!--<div *ngIf="consultas.length == 0">
+    <h1>No se han registrado consultas todavia !</h1>
+  </div>-->
+
+    <ion-list>
+
+        <ion-item *ngFor="let consulta of consultas | async">
+            <ion-label>
+
+                Codigo:
+                <h3>{{consulta.uid}}</h3>
+                <p *ngIf="usuario.rol == '3'">Medico: {{c.medicoUID}}</p>
+                <p *ngIf="usuario.rol == '2'">Paciente: {{c.pacienteUID}}</p>
+                <p>Fecha: {{consulta.fecha}}</p>
+                <p>Estado: {{consulta.estado}}</p>
+
+            </ion-label>
+            <ion-button shape="round" (click)="editConsulta(consulta.uid)" *ngIf="consulta.estado == 'Pagada, pendiente de atencion' && usuario.rol == '2'">
+                Editar
+            </ion-button>
+            <ion-button shape="round" (click)="showDiagnostico(empleo.uid)" *ngIf="consulta.estado == 'Finalizada'">
+                Diagnostico
+            </ion-button>
+            <ion-button shape="round" (click)="llamarMedico(consulta.medicoUID)" *ngIf="consulta.estado == 'Pagada, pendiente de atencion' && usuario.rol == '3'">
+                Llamar medico
+            </ion-button>
+            <ion-button shape="round" (click)="realizarPago(consulta)" *ngIf="consulta.estado == 'Creada, pendiente de pago' && usuario.rol == '3'">
+                Realizar el pago
+            </ion-button>
+        </ion-item>
+
+    </ion-list>
+
+
+</ion-content>

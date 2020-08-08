@@ -62,6 +62,24 @@ export class ConsultaService {
     } 
   }
 
+  getUsuarioById2(uid: string): Promise<any> {
+    try{
+        let aux:any = this.afs.collection("usuarios", 
+            ref => ref.where('uid', '==', uid))
+                      .valueChanges().pipe(first()).toPromise().then(doc => {                    	  
+                          return doc;
+                      }).catch(error => {
+                          throw error;
+                      });
+        if(aux.length==0)
+            return undefined;
+        return aux[0];
+    }catch(error){
+      console.error("Error", error);
+      throw error;
+    } 
+  }
+
   getConsulas(): Observable<Consulta[]> {
     return this.consultas;
   }

@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/consulta/edit-consulta/edit-consulta.module').then( m => m.EditConsultaPageModule)
   },
   {
+    path: 'edit-consulta/:uid',
+    loadChildren: () => import('./pages/consulta/edit-consulta/edit-consulta.module').then( m => m.EditConsultaPageModule)
+  },
+  {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
@@ -90,9 +94,14 @@ const routes: Routes = [
   {
     path: 'show-account',
     loadChildren: () => import('./pages/account/show-account/account.module').then( m => m.AccountPageModule)
-  },  {
+  },
+  {
     path: 'edit-account',
     loadChildren: () => import('./pages/account/edit-account/edit-account.module').then( m => m.EditAccountPageModule)
+  },
+  {
+    path: 'contactanos',
+    loadChildren: () => import('./pages/contactanos/contactanos.module').then( m => m.ContactanosPageModule)
   },
 
 

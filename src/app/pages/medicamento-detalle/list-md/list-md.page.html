@@ -11,10 +11,10 @@
 
 <ion-content>   
     <ion-list>
-      <ion-item *ngFor="let md of mediDetalles | async;">
+      <ion-item *ngFor="let md of mediDetallesVisibles">
         <ion-label>
     
-          <h2>{{md.medicamento}}</h2>
+          <h2>{{md.medicamentoUID}}</h2>
           <p> {{md.dosis}}</p>
           <div class="item-note" item-end>
     

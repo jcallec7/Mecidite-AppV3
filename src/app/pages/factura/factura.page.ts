@@ -14,6 +14,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Platform } from '@ionic/angular';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { ELocalNotificationTriggerUnit, LocalNotifications } from '@ionic-native/local-notifications/ngx';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -70,7 +71,8 @@ export class FacturaPage implements OnInit {
               public auth: AuthenticationService,
               private file: File,
               private fileOpener: FileOpener,
-              private plt: Platform) { }
+              private plt: Platform,
+              private localNotifications: LocalNotifications) { }
 
   async ngOnInit() {
 
@@ -102,7 +104,7 @@ export class FacturaPage implements OnInit {
 
   }
 
-  async saveFactura() {
+  async saveFactura(datos: any, datos3: any) {
     this.facturaService.addFactura(this.factura)
     
     let auxConsulta: Consulta = {
@@ -122,11 +124,8 @@ export class FacturaPage implements OnInit {
     
     this.router.navigate(['list-consulta']);
 
-  }
-  /* CREACION PDF*/
-  createPdf(datos: any, datos3: any) {
+    /DESCARGAR PDF/
     console.log(datos);
-
     const fecha = new Date().toISOString();
     var docDefinition = {
       content: [
@@ -180,6 +179,7 @@ export class FacturaPage implements OnInit {
         }
       }
     };
+    
     this.pdfObj = pdfMake.createPdf(docDefinition);
     if (this.plt.is('cordova')) {
       this.pdfObj.getBuffer((buffer) => {
@@ -192,7 +192,13 @@ export class FacturaPage implements OnInit {
     } else {
       this.pdfObj.download();
     }
+      /*NOTIFICACION */
+    this.localNotifications.schedule({
+    id: 3,
+    title: 'Consulta Guardada',
+    text: 'El pago esta confirmado',
+    data: { mydata: 'GUARDADO'},
+    trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
+  });
   }
-  /* FIN CREACION PDF*/
-
 }

@@ -13,8 +13,13 @@ import { NavController } from '@ionic/angular';
 })
 export class ListMdPage implements OnInit {
 
+<<<<<<< HEAD
   private mediDetalles: Observable<any[]>
   private md: MedicamentoDetalle = new MedicamentoDetalle;
+=======
+  private mediDetalles: Observable<MedicamentoDetalle[]>
+  private mediDetallesVisibles: MedicamentoDetalle[];
+>>>>>>> 96261efc9c96e6390f326e781ec039e9dc5b16d6
 
   constructor(private mdService: MdServiceService,
     private route: ActivatedRoute,
@@ -24,7 +29,34 @@ export class ListMdPage implements OnInit {
   ngOnInit() {
     this.mediDetalles = this.mdService.getMedicamentos();
     
+<<<<<<< HEAD
      
+=======
+    this.mediDetalles =  this.mdService.getMeDetalles();
+
+    this.mediDetalles.subscribe(data=>{
+
+      data.forEach(async data2 => {
+
+        let m: Medicamento = await this.mdService.getMedicamcentoById(data2.medicamentoUID);
+
+        data2.medicamentoUID = m.nombre
+
+      })
+
+      this.mediDetallesVisibles = data
+
+      console.log("MEDIDETALLE ACTUALIZADAS: ", this.mediDetallesVisibles)
+
+    })
+   
+    
+
+  }
+
+  deleteMedicamento(medicamentoID: string) {
+    this.mdService.deleteMedicamento(medicamentoID);
+>>>>>>> 96261efc9c96e6390f326e781ec039e9dc5b16d6
   }
 
   trackByFn(index,obj){
