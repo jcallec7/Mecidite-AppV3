@@ -24,16 +24,10 @@
       <ion-select [(ngModel)]="medicoSelected" (ionChange)="onChange()" interface="action-sheet" placeholder="Seleccione Uno">
         <ion-select-option *ngFor="let medico of medicos | async" [value]="medico">
           
-          <!--  
-          <ion-avatar slot="start">
-            <img [src]="user.image.url">
-          </ion-avatar>
-          -->
-
           <h3>{{medico.especialidad}}, Dr(a). </h3>
           <p>{{medico.nombre}} </p>
           <p>{{medico.apellido}}</p>
-
+          
         </ion-select-option>
       </ion-select>
     </ion-item>
@@ -51,6 +45,9 @@
   
   </ion-list>
 
-  <ion-button (click)="createConsulta()" type="submit" expand="full" fill="outline">Siguiente</ion-button>
+
+  <div class="ion-padding">
+    <ion-button expand="block" shape="block" (click)="createConsulta()" type="submit" >Siguiente</ion-button>
+  </div>
 
 </ion-content>
