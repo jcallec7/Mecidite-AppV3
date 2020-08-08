@@ -62,7 +62,7 @@ export class DiagnosticoServiceService {
 
   
 
-  async getDiagnostico(uid: string): Promise<MedicamentoDetalle> {
+  async getDiagnostico(uid: string): Promise<Diagnostico> {
     try {
       let aux: any = await this.afs.collection("diagnostico",
         ref => ref.where('uid', '==', uid))

@@ -23,7 +23,7 @@ export class ListConsultaPage implements OnInit {
   private consultas: Observable<Consulta[]>;
   private usuario: Usuario = new Usuario();
   private consultasVisibles: Consulta[];
-  private diagnostico: Diagnostico = new Diagnostico();
+  private diagnostico: Diagnostico;
 
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
@@ -133,10 +133,10 @@ export class ListConsultaPage implements OnInit {
 
   async showDiagnostico(diagnosticoUID: string)
   {
-    this.diagnosticoService.getDiagnostico(diagnosticoUID).then(Data => {
-      console.log(Data);
+    this.diagnosticoService.getDiagnostico(diagnosticoUID).then(data => {
       
-      /*this.diagnostico = Data;
+      this.diagnostico = data;
+
       console.log(this.diagnostico);
 
     });
