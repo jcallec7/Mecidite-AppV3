@@ -6,6 +6,7 @@ import { Consulta } from 'src/app/model/Consulta';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
 import { Observable } from 'rxjs';
 import {DiagnosticoServiceService} from 'src/app/services/diagnostico-service/diagnostico-service.service'
+import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
 //import { Diagnostico } from 'src/app/model/Consulta';
 
 @Component({
@@ -19,16 +20,21 @@ export class CreateDiagnosticoPage implements OnInit {
   prescripciones: Observable<MedicamentoDetalle[]>;
   //prescripcionSelected: MedicamentoDetalle;
   prescripcionSelected: [];
+  consulta: Consulta = new Consulta();
 
   
   constructor( 
     private diagnosticoService:DiagnosticoServiceService, 
     private route: ActivatedRoute, 
     public router: Router, 
-    private nav: NavController) { }
+    private nav: NavController,
+    private consultaService: ConsultaService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.prescripciones = this.diagnosticoService.getPrescripciones();
+
+    const uid = this.route.snapshot.paramMap.get('uid');
+    this.consulta = await this.consultaService.getConsulta(uid);
   }
 
   onChange() {
@@ -43,7 +49,13 @@ export class CreateDiagnosticoPage implements OnInit {
         md: this.diagnostico
       }
     };
+
+    //console.log("Este es el uid rescatado del createDiagnostico: " + this.diagnostico.uid)
     
+    this.consulta.diagnosticoUID = this.diagnostico.uid;
+
+    this.consultaService.updateConsulta2(this.consulta)
+
     this.router.navigate(["/list-diagnostico"], navigationExtras);
 
   };
