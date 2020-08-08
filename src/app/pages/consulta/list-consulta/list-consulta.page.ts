@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Consulta } from 'src/app/model/Consulta';
 import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/login/authentication.service';
 import { UsuarioService } from 'src/app/services/usuario-service/usuario.service';
 import { Usuario } from 'src/app/model/Usuario';
 import { NavController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-consulta',
@@ -16,8 +17,8 @@ import { NavController } from '@ionic/angular';
 export class ListConsultaPage implements OnInit {
 
   private consultas: Observable<Consulta[]>;
-  private usuarios: Observable<Usuario[]>; // Lista de usaurios medicos o pacientes dependiendo el rol consultante
   private usuario: Usuario = new Usuario();
+  private c: Consulta = new Consulta();
 
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
@@ -39,21 +40,75 @@ export class ListConsultaPage implements OnInit {
         console.log("usuario rol: " + this.usuario.rol)
         if(this.usuario.rol == '2') {
           this.consultas = this.consultaService.getConsultasByMedicoUID(uid)
+
+          this.consultas.subscribe(data => {
+            //let c: Consulta = data
+            //console.log("consulta recuperada?: " + JSON.stringify(data))
+            let cont = 0
+            data.forEach(async data2 => {
+              this.c = data2
+              let u: Usuario = await this.consultaService.getUsuarioById(this.c.pacienteUID)
+              this.c.pacienteUID = u.nombre + " " + u.apellido + ", " + u.cedula
+              
+            })
+
+          })
+          
         } else if (this.usuario.rol == '3') {
           this.consultas = this.consultaService.getConsultasByPacienteUID(uid)
 
           this.consultas.subscribe(data => {
             //let c: Consulta = data
             //console.log("consulta recuperada?: " + JSON.stringify(data))
-            data.forEach(data2 => {
-              let c: Consulta = data2
-              console.log("consulta recuperada?: " + c.medicoUID)
+            let cont = 0
+            data.forEach(async data2 => {
+              this.c = data2
+              let u: Usuario = await this.consultaService.getUsuarioById(this.c.medicoUID)
+              this.c.medicoUID = u.nombre + " " + u.apellido + ", " + u.especialidad
+              
             })
+
           })
 
+          
 
         }
 
+        
+
+      }else{
+        console.log("Usuario no rescatado")
+        this.router.navigate(['welcome'])
+      }
+
+    });
+
+  }
+
+  editConsulta(uid: string) {
+    this.router.navigate([`editar-empleo/${uid}`]);
+  }
+
+  async llamarmedico(uid: string) {
+    let med: Usuario = await this.consultaService.getUsuarioById(uid)
+    //med.telf //Aqui esta el telefono hazte loco
+  }
+
+  realizarPago(consulta: Consulta) {
+
+    // cargar datos de la sesion:
+    
+    this.auth.getCurrentUser().then(user => {
+      console.log(user)
+      if(user){
+
+        //console.log("Consulta Usuario uid: " + this.consulta.pacienteUID)
+        let navigationExtras: NavigationExtras = {
+          state: {
+              consulta: consulta
+          }
+        };  
+        this.router.navigate(["/factura"], navigationExtras);
       }else{
         console.log("Usuario no rescatado")
         this.router.navigate(['welcome'])

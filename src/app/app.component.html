@@ -8,18 +8,13 @@
         <ion-list id="inbox-list">
           <ion-list-header>MediCite</ion-list-header>
           <ion-note>Bienvenido</ion-note>
-          <div class="user-info">
-            <p>UserID : </p>
-          </div>
+
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-item lines="inset" class="clickable" (click)="logout()">
-            <ion-label class="logout">Cerrar Sesión</ion-label>
-          </ion-item>
 
           <section>
             <div class="app-info">

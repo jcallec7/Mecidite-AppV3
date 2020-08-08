@@ -23,17 +23,19 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class FacturaPage implements OnInit {
 
+  estado: string
+
   consulta: Consulta  = {
 
     uid: "",
     pacienteUID: "",
     medicoUID: "",
-    estado: "",
+    estado: this.estado,
     fecha: "",
     diagnosticoUID: ""
 
   }
-  
+
   pdfObj = null;
   
   factura: Factura = {
