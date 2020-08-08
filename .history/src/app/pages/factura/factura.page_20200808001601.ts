@@ -124,7 +124,7 @@ export class FacturaPage implements OnInit {
     
     this.router.navigate(['list-consulta']);
 
-    /DESCARGAR PDF/
+    /*DESCARGAR PDF*/
     console.log(datos);
     const fecha = new Date().toISOString();
     var docDefinition = {

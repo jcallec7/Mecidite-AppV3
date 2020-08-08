@@ -17,13 +17,21 @@
 
     <ion-list>
 
+<<<<<<< HEAD
         <ion-item *ngFor="let consulta, inf of consultas2, info | async">
+=======
+        <ion-item *ngFor="let consulta of consultasVisibles">
+>>>>>>> 36c344bfe1baf6671be0426ed3282081c716b826
             <ion-label>
 
                 Codigo:
                 <h3>{{consulta.uid}}</h3>
                 <p *ngIf="usuario.rol == '3'">Medico: {{consulta.medicoUID}}</p>
+<<<<<<< HEAD
                 <p *ngIf="usuario.rol == '2'">Paciente: {{inf}}</p>
+=======
+                <p *ngIf="usuario.rol == '2'">Paciente: {{consulta.pacienteUID}}</p>
+>>>>>>> 36c344bfe1baf6671be0426ed3282081c716b826
                 <p>Fecha: {{consulta.fecha}}</p>
                 <p>Estado: {{consulta.estado}}</p>
 

@@ -99,6 +99,10 @@ const routes: Routes = [
     path: 'edit-account',
     loadChildren: () => import('./pages/account/edit-account/edit-account.module').then( m => m.EditAccountPageModule)
   },
+  {
+    path: 'contactanos',
+    loadChildren: () => import('./pages/contactanos/contactanos.module').then( m => m.ContactanosPageModule)
+  },
 
 
 

@@ -124,7 +124,7 @@ export class FacturaPage implements OnInit {
     
     this.router.navigate(['list-consulta']);
 
-    /DESCARGAR PDF/
+    /*DESCARGAR PDF*/
     console.log(datos);
     const fecha = new Date().toISOString();
     var docDefinition = {
@@ -192,13 +192,17 @@ export class FacturaPage implements OnInit {
     } else {
       this.pdfObj.download();
     }
-      /*NOTIFICACION */
-    this.localNotifications.schedule({
+  }
+
+  /*NOTIFICACION */
+  this.localNotifications.schedule({
     id: 3,
     title: 'Consulta Guardada',
     text: 'El pago esta confirmado',
     data: { mydata: 'GUARDADO'},
     trigger: {in: 5, unit: ELocalNotificationTriggerUnit.SECOND}
   });
-  }
+
+
+
 }

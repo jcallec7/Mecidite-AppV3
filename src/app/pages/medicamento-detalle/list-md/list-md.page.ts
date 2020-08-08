@@ -14,8 +14,8 @@ import { Medicamento } from 'src/app/model/Medicamento';
 })
 export class ListMdPage implements OnInit {
 
-  private mediDetalles: Observable<any[]>
-  private medicamento: Medicamento = new Medicamento();
+  private mediDetalles: Observable<MedicamentoDetalle[]>
+  private mediDetallesVisibles: MedicamentoDetalle[];
 
   constructor(private mdService: MdServiceService,
     private route: ActivatedRoute,
@@ -25,9 +25,24 @@ export class ListMdPage implements OnInit {
   ngOnInit() {
     
     this.mediDetalles =  this.mdService.getMeDetalles();
-    let uid= Medicamento['uid'];
-    //this.mediDetalles =  this.mdService.getConsultasByMedicamentoUID(uid);
 
+    this.mediDetalles.subscribe(data=>{
+
+      data.forEach(async data2 => {
+
+        let m: Medicamento = await this.mdService.getMedicamcentoById(data2.medicamentoUID);
+
+        data2.medicamentoUID = m.nombre
+
+      })
+
+      this.mediDetallesVisibles = data
+
+      console.log("MEDIDETALLE ACTUALIZADAS: ", this.mediDetallesVisibles)
+
+    })
+   
+    
 
   }
 
