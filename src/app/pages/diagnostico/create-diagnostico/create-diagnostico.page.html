@@ -21,7 +21,7 @@
                 <ion-label>Medicamento</ion-label>
                 <ion-select [(ngModel)]="prescripcionSelected" (ionChange)="onChange()" interface="action-sheet"
                   placeholder="Seleccione" multiple="true">
-                  <ion-select-option *ngFor="let prescripcion of prescripciones | async" [value]="medicamento">
+                  <ion-select-option *ngFor="let prescripcion of prescripciones | async" [value]="prescripcion">
 
                     <h3>{{prescripcion.medicamento}}</h3>
                     <p>{{prescripcion.dosis}} </p>
