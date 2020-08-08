@@ -30,6 +30,8 @@ export class CreateConsultaPage implements OnInit {
   medicos: Observable<Usuario[]>;
   medicoSelected: Usuario;
 
+  private usuario: Usuario = new Usuario();
+
   constructor(private consultaService: ConsultaService,
               private route: ActivatedRoute,
               public router: Router,
@@ -47,6 +49,38 @@ export class CreateConsultaPage implements OnInit {
     const d = new Date();
     d.setDate(d.getDate() + 60);
     this.fechamax = d.toISOString(); 
+
+
+
+    console.log("obteniendo datos paciente ");
+    this.auth.getCurrentUser().then(async user => {
+      console.log(user)
+      if(user){
+        let uid = user['uid']
+        console.log("uid: " + uid)
+        this.usuario = await this.consultaService.getUsuarioById(uid)
+        console.log("usuario rol: " + this.usuario.rol)
+        if(this.usuario.rol == '2') {
+
+        
+
+          this.router.navigate(['home'])          
+
+          
+          
+        } 
+
+        
+
+      }else{
+        console.log("Usuario no rescatado")
+        this.router.navigate(['welcome'])
+      }
+
+    });
+
+
+
 
   }
 
