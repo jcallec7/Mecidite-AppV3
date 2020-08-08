@@ -18,8 +18,10 @@ export class CreateDiagnosticoPage implements OnInit {
 
   diagnostico: Diagnostico = new Diagnostico();
   prescripciones: Observable<MedicamentoDetalle[]>;
+  //prescripcionSelected: MedicamentoDetalle;
   prescripcionSelected: [];
   consulta: Consulta = new Consulta();
+
   
   constructor( 
     private diagnosticoService:DiagnosticoServiceService, 
@@ -40,7 +42,7 @@ export class CreateDiagnosticoPage implements OnInit {
   }
 
   async createDiagnostico(){
-   this.diagnosticoService.createDiagnostico(this.diagnostico, this.prescripcionSelected);
+    this.diagnosticoService.createDiagnostico(this.diagnostico, this.prescripcionSelected);
     //this.diagnosticoService.addDiagnostico(this.diagnostico);
     let navigationExtras: NavigationExtras = {
       state: {
@@ -51,9 +53,10 @@ export class CreateDiagnosticoPage implements OnInit {
     //console.log("Este es el uid rescatado del createDiagnostico: " + this.diagnostico.uid)
     
     this.consulta.diagnosticoUID = this.diagnostico.uid;
-    
 
-    //this.router.navigate(["/list-diagnostico"], navigationExtras);
+    this.consultaService.updateConsulta2(this.consulta)
+
+    this.router.navigate(["/list-diagnostico"], navigationExtras);
 
   };
 
