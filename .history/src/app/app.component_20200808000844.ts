@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
             },
             {
               title: 'Contáctanos',
-              url: 'contactanos',
+              url: '/folder/Archived',
               icon: 'archive'
             },
             {
