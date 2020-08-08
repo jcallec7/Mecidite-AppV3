@@ -20,7 +20,7 @@ export class ListConsultaPage implements OnInit {
 
   private consultas: Observable<Consulta[]>;
   private usuario: Usuario = new Usuario();
-  private c: Consulta = new Consulta();
+  private consultasVisibles: Consulta[];
 
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
@@ -43,34 +43,49 @@ export class ListConsultaPage implements OnInit {
         this.usuario = await this.consultaService.getUsuarioById(uid)
         console.log("usuario rol: " + this.usuario.rol)
         if(this.usuario.rol == '2') {
+
           this.consultas = this.consultaService.getConsultasByMedicoUID(uid)
+
+          
 
           this.consultas.subscribe(data => {
             //let c: Consulta = data
             //console.log("consulta recuperada?: " + JSON.stringify(data))
-            let cont = 0
+            
             data.forEach(async data2 => {
-              this.c = data2
-              let u: Usuario = await this.consultaService.getUsuarioById(this.c.pacienteUID)
-              this.c.pacienteUID = u.nombre + " " + u.apellido + ", " + u.cedula
+
+              let u: Usuario = await this.consultaService.getUsuarioById(data2.pacienteUID)
+
+              data2.pacienteUID = u.nombre + " " + u.apellido + ", " + u.cedula
               
             })
 
+            this.consultasVisibles = data
+
+            console.log("CONSULTAS ACTUALIZADAS: ", this.consultasVisibles)
+
           })
+
+          
+
+          
           
         } else if (this.usuario.rol == '3') {
           this.consultas = this.consultaService.getConsultasByPacienteUID(uid)
 
           this.consultas.subscribe(data => {
-            //let c: Consulta = data
-            //console.log("consulta recuperada?: " + JSON.stringify(data))
-            let cont = 0
+
             data.forEach(async data2 => {
-              this.c = data2
-              let u: Usuario = await this.consultaService.getUsuarioById(this.c.medicoUID)
-              this.c.medicoUID = u.nombre + " " + u.apellido + ", " + u.especialidad
+          
+              let u: Usuario = await this.consultaService.getUsuarioById(data2.medicoUID)
+              data2.medicoUID = u.nombre + " " + u.apellido + ", " + u.especialidad
+
               
             })
+
+            this.consultasVisibles = data
+
+            console.log("CONSULTAS ACTUALIZADAS: ", this.consultasVisibles)
 
           })
 

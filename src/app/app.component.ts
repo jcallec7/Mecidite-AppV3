@@ -98,7 +98,7 @@ export class AppComponent implements OnInit {
             },
           ]
           
-         this.router.navigate(['welcome'])
+         //this.router.navigate(['welcome'])
         }
 
       }
