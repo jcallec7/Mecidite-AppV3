@@ -78,9 +78,30 @@ export class MdServiceService {
   }
 
 
-  addMedicamento(md: MedicamentoDetalle): Promise<DocumentReference> {
-    md.uid = this.afs.createId();
-    return this.meDetalleCollection.add(md);
+  addMedicamento(md: MedicamentoDetalle){
+    const refMedicamento = this.afs.collection("medicamento-detalle");
+    md.uid = this.afs.createId()
+    const param = JSON.parse(JSON.stringify(md));
+    refMedicamento.doc(md.uid).set(param,{ merge:true});
+  }
+
+  
+  async updateDetalle(md: MedicamentoDetalle){
+
+    try{
+
+      const refMedicamento =  this.afs.collection("medicamento-detalle")
+      const param = JSON.parse(JSON.stringify(md));
+      refMedicamento.doc(md.uid).set(param)
+
+      return true
+
+    }catch(error){
+
+      return false
+
+    }
+    
   }
 
   deleteMedicamento(docID: string): Promise<any> {

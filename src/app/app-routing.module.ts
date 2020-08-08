@@ -84,6 +84,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/diagnostico/create-diagnostico/create-diagnostico.module').then( m => m.CreateDiagnosticoPageModule)
   },
   {
+    path: 'create-diagnostico/:uid',
+    loadChildren: () => import('./pages/diagnostico/create-diagnostico/create-diagnostico.module').then( m => m.CreateDiagnosticoPageModule)
+  },
+  {
     path: 'list-diagnostico',
     loadChildren: () => import('./pages/diagnostico/list-diagnostico/list-diagnostico.module').then( m => m.ListDiagnosticoPageModule)
   },

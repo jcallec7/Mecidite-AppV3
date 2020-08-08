@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MdServiceService } from 'src/app/services/md-service/md-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
 import { NavController } from '@ionic/angular';
 import { Medicamento } from 'src/app/model/Medicamento';
@@ -16,6 +16,7 @@ export class ListMdPage implements OnInit {
 
   private mediDetalles: Observable<MedicamentoDetalle[]>
   private mediDetallesVisibles: MedicamentoDetalle[];
+  private md: Observable<any[]>;
 
   constructor(private mdService: MdServiceService,
     private route: ActivatedRoute,
@@ -58,11 +59,21 @@ export class ListMdPage implements OnInit {
   showCrearMD(){
     this.router.navigate([`create-md`])
   }
-/*
-  deleteMedicamentoDetalle(medicamentoID: string) {
-    this.mdService.deleteMedicamentoDetalle(medicamentoID);
+
+  showEditMedicamento(medicamentoID: string){
+    //this.md = this.mdService.getDetalle(medicamentoID);
+    this.md.subscribe(data=>{
+      let extras: NavigationExtras = {
+        state:{
+          medicamento:data
+        }
+      }
+      this.router.navigate([`edit-md`], extras)
+    })
+    
+    
   }
-*/
+
   goBack() {
     this.nav.back();
   }

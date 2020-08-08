@@ -113,7 +113,7 @@ export class ListConsultaPage implements OnInit {
   }
 
   editConsulta(uid: string) {
-    this.router.navigate([`editar-empleo/${uid}`]);
+    this.router.navigate([`edit-consulta/${uid}`]);
     /*NOTIFICACION */
     this.localNotifications.schedule({
     id: 5,
@@ -161,6 +161,10 @@ export class ListConsultaPage implements OnInit {
 
     });
 
+  }
+
+  addDiagnostico(consulta: Consulta) {
+    this.router.navigate([`create-diagnostico/${consulta.uid}`]);
   }
 
   goBack() {

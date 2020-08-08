@@ -18,17 +18,17 @@ export class EditMedicamentoPage implements OnInit {
     private route: ActivatedRoute) { }
 
   medicamento = new Medicamento();
-  
+
   showItem = false;
 
   ngOnInit() {
-    this.route.queryParams.subscribe(data=>{
-      this.medicamento= this.router.getCurrentNavigation().extras.state.medicamento;
+    this.route.queryParams.subscribe(data => {
+      this.medicamento = this.router.getCurrentNavigation().extras.state.medicamento;
     })
   }
 
   updateMedicamento() {
-    const message = this.ms.updateMedicamento(this.medicamento);
+    const message = this.ms. updateMedicamento(this.medicamento);
 
     message.then(async msg => {
 
