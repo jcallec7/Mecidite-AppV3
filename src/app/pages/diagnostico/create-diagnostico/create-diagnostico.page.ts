@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Diagnostico } from 'src/app/model/Diagnostico';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Consulta } from 'src/app/model/Consulta';
 import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
@@ -26,18 +26,30 @@ export class CreateDiagnosticoPage implements OnInit {
     private nav: NavController) { }
 
   ngOnInit() {
-    this.prescripciones = this.diagnosticoService.getPrescripcion();
+    this.prescripciones = this.diagnosticoService.getPrescripciones();
   }
 
   onChange() {
-    console.log("Selected: " + this.prescripcionSelected + " uid: " + this.prescripcionSelected.uid);
+    console.log("Selected: " + this.prescripcionSelected);
   }
 
   async createDiagnostico(){
    this.diagnosticoService.createDiagnostico(this.diagnostico, this.prescripcionSelected);
     //this.diagnosticoService.addDiagnostico(this.diagnostico);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        md: this.diagnostico
+      }
+    };
     
+    this.router.navigate(["/list-diagnostico"], navigationExtras);
+
   };
+
+  goBack() {
+    this.nav.back();
+  }
+
 
   
   

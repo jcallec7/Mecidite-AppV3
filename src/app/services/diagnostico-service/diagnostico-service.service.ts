@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Diagnostico } from 'src/app/model/Diagnostico';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { first, map, take } from 'rxjs/operators';
+import { MedicamentoDetalle } from 'src/app/model/MedicamentoDetalle';
 
 @Injectable({
   providedIn: 'root'
@@ -31,13 +32,59 @@ export class DiagnosticoServiceService {
       .valueChanges();
   }
 
-  getPrescripcion(): Observable<any[]> {
-    return this.afs.collection('medicamento-detalle')
-      .valueChanges();
+  getPrescripciones(): Observable<any[]> {
+    return this.afs.collection('medicamento-detalle').valueChanges();
+  }
+  
+  getDiagnosticos(): Observable<Diagnostico[]> {
+    return this.diagnosticos;
+  }
+  
+
+
+  async getDetalleById(uid: string): Promise<MedicamentoDetalle> {
+    try {
+      let aux: any = await this.afs.collection("medicamento-detalle",
+        ref => ref.where('uid', '==', uid))
+        .valueChanges().pipe(first()).toPromise().then(doc => {
+          return doc;
+        }).catch(error => {
+          throw error;
+        });
+      if (aux.length == 0)
+        return undefined;
+      return aux[0];
+    } catch (error) {
+      console.error("Error", error);
+      throw error;
+    }
+  }
+
+  
+
+  async getDiagnostico(uid: string): Promise<MedicamentoDetalle> {
+    try {
+      let aux: any = await this.afs.collection("diagnostico",
+        ref => ref.where('uid', '==', uid))
+        .valueChanges().pipe(first()).toPromise().then(doc => {
+          return doc;
+        }).catch(error => {
+          throw error;
+        });
+      if (aux.length == 0)
+        return undefined;
+      return aux[0];
+    } catch (error) {
+      console.error("Error", error);
+      throw error;
+    }
   }
 
 
-  //getDiagnostico(uid:string): Observable<Diagnostico>{}
+
+
+
+
 
   createDiagnostico(diagnostico: Diagnostico, prescripcionId: []) {
     
@@ -51,6 +98,13 @@ export class DiagnosticoServiceService {
     });
 
   }
+
+
+  /*
+  updateConsulta(diagnostico: Diagnostico): Promise<void> {
+    //return this.diagnosticoCollection.doc(diagnostico.uid).update({ estado: consulta.estado });
+  }
+*/
   
 
   deleteNote(uid: string): Promise<void> {

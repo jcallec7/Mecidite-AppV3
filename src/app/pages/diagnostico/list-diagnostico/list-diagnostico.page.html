@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar class="color">
-    <ion-title class="title">Diagnosticos</ion-title>
+    <ion-title class="title">Diagnostico</ion-title>
+    <ion-buttons slot="start">
+			<ion-button slot="icon-only" class="back-button" color="light" (click)="goBack()">
+				<ion-icon name="arrow-back"></ion-icon>
+			</ion-button>
+		</ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content>   
+    <ion-list>
+      <ion-item *ngFor="let d of diagnosticosVisibles">
+        <ion-label>
+    
+          <h2>{{d.prescripcionUID}}</h2>
+          <p> {{d.tipo}}</p>
+          <p> {{d.descripcion}}</p>
+          <div class="item-note" item-end>
+    
+            <ion-button (click)="deleteMedicamento(md.uid)" color="danger">Delete</ion-button>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    
+      <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="showCrearMD()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    
+    
+    
+    
 </ion-content>
