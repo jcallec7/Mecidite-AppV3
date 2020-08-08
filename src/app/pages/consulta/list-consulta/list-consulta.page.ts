@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber, of } from 'rxjs';
 import { Consulta } from 'src/app/model/Consulta';
 import { ConsultaService } from 'src/app/services/consulta-service/consulta.service';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
@@ -21,6 +21,7 @@ export class ListConsultaPage implements OnInit {
   private consultas: Observable<Consulta[]>;
   private usuario: Usuario = new Usuario();
   private c: Consulta = new Consulta();
+  private info: Observable<any[]>
 
   constructor(private consultaService: ConsultaService, 
               private route: ActivatedRoute, 
@@ -34,6 +35,8 @@ export class ListConsultaPage implements OnInit {
 
     // cargar datos de la sesion:
     
+    let auxInfo: any[] = []
+
     console.log("obteniendo datos paciente ");
     this.auth.getCurrentUser().then(async user => {
       console.log(user)
@@ -46,17 +49,28 @@ export class ListConsultaPage implements OnInit {
           this.consultas = this.consultaService.getConsultasByMedicoUID(uid)
 
           this.consultas.subscribe(data => {
-            //let c: Consulta = data
-            //console.log("consulta recuperada?: " + JSON.stringify(data))
-            let cont = 0
             data.forEach(async data2 => {
               this.c = data2
               let u: Usuario = await this.consultaService.getUsuarioById(this.c.pacienteUID)
               this.c.pacienteUID = u.nombre + " " + u.apellido + ", " + u.cedula
+              console.log("Entrando al for para guardar: " + JSON.stringify(this.c.pacienteUID) )
+              auxInfo.push(this.c.pacienteUID)
+              
+              console.log("Datos info: " + JSON.stringify(auxInfo) )
+              this.info = of(auxInfo)
+              
+              
               
             })
 
+            
+
           })
+
+          //console.log("CS: " + JSON.stringify(this.cs) )
+
+          
+
           
         } else if (this.usuario.rol == '3') {
           this.consultas = this.consultaService.getConsultasByPacienteUID(uid)
@@ -86,6 +100,8 @@ export class ListConsultaPage implements OnInit {
       }
 
     });
+
+    
 
   }
 

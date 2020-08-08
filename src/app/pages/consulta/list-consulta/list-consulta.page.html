@@ -17,13 +17,13 @@
 
     <ion-list>
 
-        <ion-item *ngFor="let consulta of consultas | async">
+        <ion-item *ngFor="let consulta, inf of consultas2, info | async">
             <ion-label>
 
                 Codigo:
                 <h3>{{consulta.uid}}</h3>
-                <p *ngIf="usuario.rol == '3'">Medico: {{c.medicoUID}}</p>
-                <p *ngIf="usuario.rol == '2'">Paciente: {{c.pacienteUID}}</p>
+                <p *ngIf="usuario.rol == '3'">Medico: {{consulta.medicoUID}}</p>
+                <p *ngIf="usuario.rol == '2'">Paciente: {{inf}}</p>
                 <p>Fecha: {{consulta.fecha}}</p>
                 <p>Estado: {{consulta.estado}}</p>
 
