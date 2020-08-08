@@ -133,10 +133,7 @@ export class ListConsultaPage implements OnInit {
 
   async showDiagnostico(diagnosticoUID: string)
   {
-    this.diagnosticoService.getDiagnostico(diagnosticoUID).then(Data => {
-      console.log(Data);
 
-    });
   }
 
   realizarPago(consulta: Consulta) {
