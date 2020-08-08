@@ -16,7 +16,7 @@ export class ListMdPage implements OnInit {
 
   private mediDetalles: Observable<MedicamentoDetalle[]>
   private mediDetallesVisibles: MedicamentoDetalle[];
-  private md: Observable<any[]>;
+  private md: Promise<MedicamentoDetalle>;
 
   constructor(private mdService: MdServiceService,
     private route: ActivatedRoute,
@@ -24,6 +24,7 @@ export class ListMdPage implements OnInit {
     private router: Router ) { }
   
   ngOnInit() {
+   
     this.mediDetalles = this.mdService.getMedicamentos();
     
     this.mediDetalles =  this.mdService.getMeDetalles();
@@ -61,13 +62,14 @@ export class ListMdPage implements OnInit {
   }
 
   showEditMedicamento(medicamentoID: string){
-    //this.md = this.mdService.getDetalle(medicamentoID);
-    this.md.subscribe(data=>{
+    this.md = this.mdService.getDetalle(medicamentoID);
+    this.md.then(data=>{
       let extras: NavigationExtras = {
         state:{
-          medicamento:data
+          md:data
         }
       }
+      console.log(extras);
       this.router.navigate([`edit-md`], extras)
     })
     
