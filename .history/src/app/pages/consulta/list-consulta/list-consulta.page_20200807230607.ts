@@ -91,16 +91,11 @@ export class ListConsultaPage implements OnInit {
     this.router.navigate([`editar-empleo/${uid}`]);
   }
 
-  async llamarmedico(uid: string) {
-    const med: Usuario = await this.consultaService.getUsuarioById(uid);
+  llamarmedico(uid: string) {
+    let med: Usuario = await this.consultaService.getUsuarioById(uid);
     console.log(med.telf);
     this.callNumber.callNumber(med.telf, true);
     //med.telf //Aqui esta el telefono hazte loco
-  }
-
-  async showDiagnostico()
-  {
-
   }
 
   goBack() {

@@ -8,7 +8,6 @@ import { UsuarioService } from 'src/app/services/usuario-service/usuario.service
 import { Usuario } from 'src/app/model/Usuario';
 import { NavController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
   selector: 'app-list-consulta',
@@ -25,8 +24,7 @@ export class ListConsultaPage implements OnInit {
               private route: ActivatedRoute, 
               public router: Router, 
               public auth: AuthenticationService,
-              private nav: NavController,
-              private callNumber: CallNumber) { }
+              private nav: NavController) { }
 
   ngOnInit() {
 
@@ -92,15 +90,8 @@ export class ListConsultaPage implements OnInit {
   }
 
   async llamarmedico(uid: string) {
-    const med: Usuario = await this.consultaService.getUsuarioById(uid);
-    console.log(med.telf);
-    this.callNumber.callNumber(med.telf, true);
+    let med: Usuario = await this.consultaService.getUsuarioById(uid)
     //med.telf //Aqui esta el telefono hazte loco
-  }
-
-  async showDiagnostico()
-  {
-
   }
 
   goBack() {

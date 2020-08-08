@@ -122,8 +122,11 @@ export class FacturaPage implements OnInit {
     
     this.router.navigate(['list-consulta']);
 
-    /*DESCARGAR PDF*/
+  }
+  /* CREACION PDF*/
+  createPdf(datos: any, datos3: any) {
     console.log(datos);
+
     const fecha = new Date().toISOString();
     var docDefinition = {
       content: [
@@ -177,7 +180,6 @@ export class FacturaPage implements OnInit {
         }
       }
     };
-    
     this.pdfObj = pdfMake.createPdf(docDefinition);
     if (this.plt.is('cordova')) {
       this.pdfObj.getBuffer((buffer) => {
@@ -191,5 +193,6 @@ export class FacturaPage implements OnInit {
       this.pdfObj.download();
     }
   }
+  /* FIN CREACION PDF*/
 
 }

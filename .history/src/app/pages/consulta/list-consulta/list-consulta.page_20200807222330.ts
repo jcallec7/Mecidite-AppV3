@@ -92,15 +92,9 @@ export class ListConsultaPage implements OnInit {
   }
 
   async llamarmedico(uid: string) {
-    const med: Usuario = await this.consultaService.getUsuarioById(uid);
-    console.log(med.telf);
+    let med: Usuario = await this.consultaService.getUsuarioById(uid);
     this.callNumber.callNumber(med.telf, true);
     //med.telf //Aqui esta el telefono hazte loco
-  }
-
-  async showDiagnostico()
-  {
-
   }
 
   goBack() {

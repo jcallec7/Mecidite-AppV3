@@ -100,7 +100,7 @@ export class ListConsultaPage implements OnInit {
 
   async showDiagnostico()
   {
-
+    
   }
 
   goBack() {

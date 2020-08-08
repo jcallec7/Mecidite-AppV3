@@ -38,7 +38,6 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
     Camera,
     File,
     FileOpener,
-    CallNumber,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }  
   ],
   bootstrap: [AppComponent]
