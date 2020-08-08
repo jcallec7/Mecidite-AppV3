@@ -84,9 +84,11 @@ export class ConsultaService {
   } 
   }
 
-  addConsulta(consulta: Consulta): Promise<DocumentReference> {
+  addConsulta(consulta: Consulta) {
+    const refConsulta = this.afs.collection('consultas');
     consulta.uid = this.afs.createId();
-    return this.consultaCollection.add(consulta);
+    const param = JSON.parse(JSON.stringify(consulta));
+    refConsulta.doc(consulta.uid).set(param, {merge: true});
   }
 
   updateConsulta(consulta: Consulta): Promise<void> {
@@ -94,7 +96,11 @@ export class ConsultaService {
   }
 
   updateConsulta2(consulta: Consulta) {
-    this.afs.collection('consultas').doc(consulta.uid).set({ estado: consulta.estado });
+    console.log("AQUI DEBE ACTUALISARSE EL ESTADO DE: " + consulta.uid + " A: " + consulta.estado)
+    const refUser =  this.afs.collection("consultas")
+    const param = JSON.parse(JSON.stringify(consulta));
+    console.log("params a actualizarse: " + JSON.stringify(param))
+    refUser.doc(consulta.uid).update(param)
   }
 
   deleteConsulta(uid: string): Promise<void> {
