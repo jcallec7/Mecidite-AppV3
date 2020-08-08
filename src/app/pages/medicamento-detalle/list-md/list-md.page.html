@@ -18,7 +18,8 @@
           <p> {{md.dosis}}</p>
           <div class="item-note" item-end>
     
-            <ion-button (click)="deleteMedicamento(md.uid)" color="danger">Delete</ion-button>
+            <ion-button (click)="showEditMedicamento(md.uid)">Editar</ion-button>
+            <ion-button (click)="deleteMedicamento(md.uid)" color="danger">Eliminar</ion-button>
           </div>
         </ion-label>
       </ion-item>

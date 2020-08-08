@@ -22,7 +22,9 @@ export class MedicamentoServiceService {
   }
 
 
-  
+  getMedicamentos(): Observable<any[]>{
+    return this.afs.collection('medicamento').valueChanges();
+  }
 
   async updateMedicamento(medicamento: Medicamento){
 
