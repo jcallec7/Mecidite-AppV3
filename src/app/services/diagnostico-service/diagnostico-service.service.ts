@@ -80,6 +80,14 @@ export class DiagnosticoServiceService {
     }
   }
 
+  getDiagnosticoByUID(uid: string): Observable<Diagnostico> {
+
+    let itemDoc = this.afs.doc<any>(`diagnostico/${uid}`);
+    console.log(itemDoc);
+    return itemDoc.valueChanges();
+    
+  }
+
 
 
 

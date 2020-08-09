@@ -32,10 +32,9 @@ export class ListConsultaPage implements OnInit {
   private consultas: Observable<Consulta[]>;
   private usuario: Usuario = new Usuario();
   private consultasVisibles: Consulta[];
-  private diagnostico: Diagnostico;
+  private diagnostico: Observable<Diagnostico>;
+  
   pdfObj = null;
-  private medicamento: string;
-  private medicamentoNombres: Medicamento [];
 
 
   
@@ -72,8 +71,6 @@ export class ListConsultaPage implements OnInit {
 
           this.consultas = this.consultaService.getConsultasByMedicoUID(uid)
 
-          
-
           this.consultas.subscribe(data => {
             //let c: Consulta = data
             //console.log("consulta recuperada?: " + JSON.stringify(data))
@@ -97,6 +94,7 @@ export class ListConsultaPage implements OnInit {
           
           
         } else if (this.usuario.rol == '3') {
+
           this.consultas = this.consultaService.getConsultasByPacienteUID(uid)
 
           this.consultas.subscribe(data => {
@@ -157,22 +155,38 @@ export class ListConsultaPage implements OnInit {
   async showDiagnostico(diagnosticoUID: string)
   {
     
-    this.diagnosticoService.getDiagnostico(diagnosticoUID).then(data => {
+    this.diagnostico = this.diagnosticoService.getDiagnosticoByUID(diagnosticoUID)
+    
+    this.diagnostico.subscribe(data => {
+
+      let nombres = []
+      
+
+      data.medicamento.forEach( async data2 =>{
+        
+        let md: MedicamentoDetalle;
+        let m: Medicamento;
+
+        md = await this.md.getDetalle(data2)
+        m = await this.medicamentoService.getMedicamentoByUID(md.medicamentoUID)
+
+
+        nombres.push(m.nombre+ " " + m.concentracion)
+
+        
+        
+      })
+
+      
+      console.log("ANTES",data.medicamento)
+
+      data.medicamento=nombres
+
+      console.log("DESPUES",data.medicamento)
 
      
 
-      data.medicamento.forEach( async data2=>{
-        let m: Medicamento;
-        let md: MedicamentoDetalle;
-        
-        //md = await this.md.getMedicamcentoById(data2);
-        console.log(data2)
-        //data.medicamento = [m.concentracion+' ' +m.nombre+' '+m.uid];
-        
-      })
-      this.diagnostico = data;
-      console.log(this.diagnostico);
-
+      
       const fecha = new Date().toISOString();
 
       var docDefinition = {
@@ -203,7 +217,7 @@ export class ListConsultaPage implements OnInit {
           { text: 'Descripcion:', style: 'subheader' },
           { text: data.descripcion},
           { text: 'Medicamentos:', style: 'subheader' },
-          { text: this.diagnostico.medicamento},
+          { text: data.medicamento}
 
         ],
         styles: {
@@ -239,9 +253,12 @@ export class ListConsultaPage implements OnInit {
 
 
 
-
-
     });
+
+   
+
+   
+
   }
 
   realizarPago(consulta: Consulta) {
